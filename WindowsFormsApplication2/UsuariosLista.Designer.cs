@@ -108,6 +108,7 @@
             this.Controls.Add(this.listView1);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "UsuariosLista";
             this.Text = "UsuariosLista";
             this.Load += new System.EventHandler(this.UsuariosLista_Load);

@@ -23,7 +23,7 @@ namespace WindowsFormsApplication2
         int tiempo;
         string ruta;
         bool[] asientos = new bool[30];
-
+        int AsientosDisp;
 
 
         public static int CompareVueloAsiento(Vuelo v1, Vuelo v2)
@@ -49,6 +49,7 @@ namespace WindowsFormsApplication2
             this.ruta = ruta;
             this.costo = costo;
             this.tiempo = tiempo;
+            AsientosDisp = 30;
             var ran = new Random();
 
            
@@ -57,10 +58,11 @@ namespace WindowsFormsApplication2
             int hr = ran.Next(0, 24);
             int min = ran.Next(0, 60);
             int sec = ran.Next(0, 60);     
+           
 
             date = new DateTime(2016, m, d,hr,min,sec);
 
-            System.Threading.Thread.Sleep(200);
+            System.Threading.Thread.Sleep(100);
         }
 
 
@@ -75,18 +77,15 @@ namespace WindowsFormsApplication2
             if (!asientos[a - 1])
             {
                 asientos[a - 1] = true;
+                AsientosDisp--;
             }
-            else { asientos[a - 1] = false; }
+            else {
+                AsientosDisp++;
+                asientos[a - 1] = false; }
             }
         public int getAsientosDisp()
         {
-            int x = new int();
-            for(int i = 0; i < 30; i++)
-            {
-                if (asientos[i] == false) { x =x  + 1; }
-            }
-            
-            return x;
+            return AsientosDisp;
         }
         
 

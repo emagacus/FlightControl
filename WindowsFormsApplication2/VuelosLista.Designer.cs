@@ -84,6 +84,7 @@
             this.Controls.Add(this.button1);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.listBox1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "VuelosLista";
             this.Text = "vuelos";
             this.Load += new System.EventHandler(this.VuelosLista_Load);
