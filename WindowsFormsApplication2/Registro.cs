@@ -14,20 +14,19 @@ namespace WindowsFormsApplication2
     {
         string vuelo, asiento; int No_asiento;
         Vuelo vueloObject;
-        List<Usuario> userlist = new List<Usuario>();
+        
 
         public Registro()
         {
             InitializeComponent();
         }
 
-        public Registro(string vuelo,string asiento,int No_asiento, ref Vuelo vueloObject,ref List<Usuario> userlist)
+        public Registro(string vuelo,string asiento,int No_asiento, ref Vuelo vueloObject)
         {
             this.vueloObject = vueloObject;
             this.vuelo = vuelo;
             this.asiento = asiento;
             this.No_asiento = No_asiento;
-            this.userlist = userlist;
             InitializeComponent();
             this.vuelo_textBox.Text = vuelo;
             this.vuelo_textBox.Enabled = false;
@@ -46,8 +45,8 @@ namespace WindowsFormsApplication2
         private void button1_Click(object sender, EventArgs e)
         {
             vueloObject.setAsientoTomado(No_asiento);
-            Usuario user = new Usuario(textBox3.Text, textBox4.Text, vuelo, No_asiento);
-            userlist.Add(user);
+            Usuario user = new Usuario(textBox3.Text, textBox4.Text, vuelo ,No_asiento);
+            vueloObject.userlist.Add(user);
             this.Close();
         }
 

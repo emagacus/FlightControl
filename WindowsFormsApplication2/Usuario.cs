@@ -28,9 +28,11 @@ namespace WindowsFormsApplication2
         }
 
 
+        public int getAsiento() { return Asiento; }
+
         public override string ToString()
         {
-            return Nombre.ToString() +" "+ Apellidos.ToString()+ " "+ Vuelo.ToString()+ " " + Asiento.ToString();
+            return Nombre.ToString() +"|"+ Apellidos.ToString() + "|" + Asiento.ToString() + "|" + Vuelo.ToString();
         }
 
     }

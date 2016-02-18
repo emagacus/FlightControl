@@ -16,16 +16,16 @@ namespace WindowsFormsApplication2
       
 
         List<Vuelo> listaVuelos = new List<Vuelo>();
-        List<Usuario> userlist = new List<Usuario>();
+        
 
         Vuelo vuelo = new Vuelo();
 
-        public Principal(ref List<Vuelo> listaVuelos,ref List<Usuario> userlist)
+        public Principal(ref List<Vuelo> listaVuelos)
         {
-
+            
             InitializeComponent();
             this.listaVuelos = listaVuelos;
-            this.userlist = userlist;
+    
 
         }
 
@@ -45,25 +45,16 @@ namespace WindowsFormsApplication2
         private void button1_Click(object sender, EventArgs e)
         {
             Console.WriteLine("button clicked");
-            VuelosLista ventanaVuelos = new VuelosLista(ref listaVuelos,ref userlist);
+            VuelosLista ventanaVuelos = new VuelosLista(ref listaVuelos);
             ventanaVuelos.ShowDialog();
            
         }
 
         private void button1_Click_1(object sender, EventArgs e)
         {
-
-            if (userlist.Count != 0)
-            {
-                UsuariosLista usuariolista = new UsuariosLista(ref userlist);
-                usuariolista.ShowDialog();
-            }
-
-            else {
-
-                MessageBox.Show("TODAVIA NO EXISTE NINGUN USUARIO", "ERROR",
-                    MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+            UsuariosLista userlistwindow = new UsuariosLista(ref listaVuelos);
+            userlistwindow.ShowDialog();
+           
             }
     }
 }

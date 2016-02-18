@@ -63,6 +63,7 @@
             this.ClientSize = new System.Drawing.Size(368, 368);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.vuelosButton);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "Principal";
             this.Text = "Principal";
             this.Load += new System.EventHandler(this.Principal_Load);

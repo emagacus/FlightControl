@@ -4,8 +4,12 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+
 namespace WindowsFormsApplication2
 {
+
+
+
     static class Program
     {
         /// <summary>
@@ -57,6 +61,12 @@ namespace WindowsFormsApplication2
 
 
             List<Vuelo> listaVuelos = new List<Vuelo>();
+
+        
+
+
+            
+
             listaVuelos.Add(vuelo0);
             listaVuelos.Add(vuelo1);
             listaVuelos.Add(vuelo2);
@@ -92,9 +102,9 @@ namespace WindowsFormsApplication2
             listaVuelos.Add(vuelo32);
             listaVuelos.Add(vuelo33);
 
-            List<Usuario> userlist= new List<Usuario>();
+            
 
-            Principal ventanaPrincipal = new Principal(ref listaVuelos,ref userlist);
+            Principal ventanaPrincipal = new Principal(ref listaVuelos);
 
             ventanaPrincipal.ShowDialog();
             Console.WriteLine("fin del programa");  
