@@ -23,8 +23,8 @@ namespace WindowsFormsApplication2
         {
             
             InitializeComponent();
-            
 
+            Buscar.Enabled = false;
             this.listaVuelos = listaVuelos;
 
          
@@ -43,13 +43,16 @@ namespace WindowsFormsApplication2
         }
 
   
+
+
         private void button1_Click(object sender, EventArgs e)
         {
             
             
             this.listBox1.SelectedItem.ToString();
             Console.WriteLine(this.listBox1.SelectedItem.ToString());
-         //   Registro ventanaRegistro = new Registro(this.listBox1.SelectedItem.ToString());
+         
+            //   Registro ventanaRegistro = new Registro(this.listBox1.SelectedItem.ToString());
            // ventanaRegistro.ShowDialog();
             
         }
@@ -60,6 +63,7 @@ namespace WindowsFormsApplication2
                 this.button2.Enabled = true;
             }
         }
+
 
         private void VuelosLista_Load(object sender, EventArgs e)
         {
@@ -77,6 +81,7 @@ namespace WindowsFormsApplication2
             ventanaAsientos.ShowDialog();
         }
 
+
         private void button1_Click_1(object sender, EventArgs e)
         {
 
@@ -85,7 +90,7 @@ namespace WindowsFormsApplication2
             for (int x = 0; x < this.listaVuelos.Count; x++)
             {
 
-                listBox1.Items.Add(this.listaVuelos[x].ToString());
+                listBox1.Items.Add(listaVuelos[x].ToString());
 
             }
 
@@ -99,7 +104,7 @@ namespace WindowsFormsApplication2
             for (int x = 0; x < this.listaVuelos.Count; x++)
             {
 
-                listBox1.Items.Add(this.listaVuelos[x].ToString());
+                listBox1.Items.Add(listaVuelos[x].ToString());
 
             }
 
@@ -231,11 +236,27 @@ namespace WindowsFormsApplication2
             }
         }
 
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+            if (textBox1.Text != null)
+            {
+                Buscar.Enabled = true;
+            }
+        }
 
+        private void Buscar_Click(object sender, EventArgs e)
+        {
+            listBox1.Items.Clear();
 
+            foreach(Vuelo v in listaVuelos)
+            {
+                if (v.ToString().Contains(textBox1.Text.ToString()))
+                {
+                    listBox1.Items.Add(v.ToString());
+                }
+                }//fin foreach
 
-
-
+        }
     }
 }
 

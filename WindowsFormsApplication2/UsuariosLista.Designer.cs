@@ -35,12 +35,11 @@
             this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.Vuelo = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.SuspendLayout();
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(511, 19);
+            this.button1.Location = new System.Drawing.Point(591, 19);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 55);
             this.button1.TabIndex = 1;
@@ -50,7 +49,7 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(511, 237);
+            this.button2.Location = new System.Drawing.Point(591, 288);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(75, 23);
             this.button2.TabIndex = 2;
@@ -64,13 +63,12 @@
             this.columnHeader2,
             this.columnHeader3,
             this.columnHeader1,
-            this.Vuelo,
-            this.columnHeader4});
+            this.Vuelo});
             this.listView1.FullRowSelect = true;
             this.listView1.Location = new System.Drawing.Point(12, 19);
             this.listView1.MultiSelect = false;
             this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(481, 241);
+            this.listView1.Size = new System.Drawing.Size(573, 292);
             this.listView1.TabIndex = 3;
             this.listView1.UseCompatibleStateImageBehavior = false;
             this.listView1.View = System.Windows.Forms.View.Details;
@@ -94,17 +92,13 @@
             // Vuelo
             // 
             this.Vuelo.Text = "Vuelo";
-            this.Vuelo.Width = 109;
-            // 
-            // columnHeader4
-            // 
-            this.columnHeader4.Text = "No.Vuelo";
+            this.Vuelo.Width = 260;
             // 
             // UsuariosLista
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(598, 272);
+            this.ClientSize = new System.Drawing.Size(678, 323);
             this.Controls.Add(this.listView1);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
@@ -124,6 +118,5 @@
         private System.Windows.Forms.ColumnHeader columnHeader3;
         private System.Windows.Forms.ColumnHeader columnHeader1;
         private System.Windows.Forms.ColumnHeader Vuelo;
-        private System.Windows.Forms.ColumnHeader columnHeader4;
     }
 }

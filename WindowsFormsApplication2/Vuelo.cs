@@ -42,7 +42,7 @@ namespace WindowsFormsApplication2
 
         }
 
-        public Vuelo(string od,string ruta,int costo, int tiempo)
+        public Vuelo(int AsientosDisp,string od,string ruta,int costo, int tiempo)
         {
             origen = od[0];
             destino = od[1];
@@ -50,6 +50,7 @@ namespace WindowsFormsApplication2
             this.costo = costo;
             this.tiempo = tiempo;
             AsientosDisp = 30;
+            this.AsientosDisp = AsientosDisp;
             var ran = new Random();
 
            
@@ -62,7 +63,7 @@ namespace WindowsFormsApplication2
 
             date = new DateTime(2016, m, d,hr,min,sec);
 
-            System.Threading.Thread.Sleep(100);
+            System.Threading.Thread.Sleep(50);
         }
 
 
@@ -92,8 +93,16 @@ namespace WindowsFormsApplication2
         public override string ToString()
         {
 
-            return  getAsientosDisp().ToString() +' '+ origen.ToString() + ' ' + destino.ToString() + ' ' + tiempo.ToString() + ' ' + ruta.ToString() + ' ' + costo.ToString() + ' ' + date.ToString() ;
-            
+            return getAsientosDisp().ToString() + ' ' + origen.ToString() + ' ' + destino.ToString() + ' ' + tiempo.ToString() + ' ' + ruta.ToString() + ' ' + costo.ToString() + ' ' + date.ToString() ;
+           
+        }
+
+
+        public string ToString(char c)
+        {
+
+            return getAsientosDisp().ToString() + c + origen.ToString() + destino.ToString() + c + ruta.ToString() + c + tiempo.ToString() + c + costo.ToString() + c + date.ToString();
+
         }
 
     }

@@ -42,7 +42,7 @@
             // 
             this.vuelo_textBox.Location = new System.Drawing.Point(12, 29);
             this.vuelo_textBox.Name = "vuelo_textBox";
-            this.vuelo_textBox.Size = new System.Drawing.Size(203, 20);
+            this.vuelo_textBox.Size = new System.Drawing.Size(245, 20);
             this.vuelo_textBox.TabIndex = 0;
             this.vuelo_textBox.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
