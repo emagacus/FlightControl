@@ -35,11 +35,14 @@
             this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.Vuelo = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.textBox_buscar = new System.Windows.Forms.TextBox();
+            this.button_buscar = new System.Windows.Forms.Button();
+            this.buttonRecargar = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(591, 19);
+            this.button1.Location = new System.Drawing.Point(591, 31);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 55);
             this.button1.TabIndex = 1;
@@ -49,7 +52,7 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(591, 288);
+            this.button2.Location = new System.Drawing.Point(591, 364);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(75, 23);
             this.button2.TabIndex = 2;
@@ -65,10 +68,10 @@
             this.columnHeader1,
             this.Vuelo});
             this.listView1.FullRowSelect = true;
-            this.listView1.Location = new System.Drawing.Point(12, 19);
+            this.listView1.Location = new System.Drawing.Point(12, 31);
             this.listView1.MultiSelect = false;
             this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(573, 292);
+            this.listView1.Size = new System.Drawing.Size(573, 356);
             this.listView1.TabIndex = 3;
             this.listView1.UseCompatibleStateImageBehavior = false;
             this.listView1.View = System.Windows.Forms.View.Details;
@@ -94,11 +97,42 @@
             this.Vuelo.Text = "Vuelo";
             this.Vuelo.Width = 260;
             // 
+            // textBox_buscar
+            // 
+            this.textBox_buscar.Location = new System.Drawing.Point(12, 5);
+            this.textBox_buscar.Name = "textBox_buscar";
+            this.textBox_buscar.Size = new System.Drawing.Size(168, 20);
+            this.textBox_buscar.TabIndex = 4;
+            this.textBox_buscar.TextChanged += new System.EventHandler(this.textBox_buscar_TextChanged);
+            // 
+            // button_buscar
+            // 
+            this.button_buscar.Location = new System.Drawing.Point(186, 3);
+            this.button_buscar.Name = "button_buscar";
+            this.button_buscar.Size = new System.Drawing.Size(75, 23);
+            this.button_buscar.TabIndex = 5;
+            this.button_buscar.Text = "Buscar";
+            this.button_buscar.UseVisualStyleBackColor = true;
+            this.button_buscar.Click += new System.EventHandler(this.button_buscar_Click);
+            // 
+            // buttonRecargar
+            // 
+            this.buttonRecargar.Location = new System.Drawing.Point(276, 3);
+            this.buttonRecargar.Name = "buttonRecargar";
+            this.buttonRecargar.Size = new System.Drawing.Size(75, 23);
+            this.buttonRecargar.TabIndex = 6;
+            this.buttonRecargar.Text = "Recargar";
+            this.buttonRecargar.UseVisualStyleBackColor = true;
+            this.buttonRecargar.Click += new System.EventHandler(this.buttonRecargar_Click);
+            // 
             // UsuariosLista
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(678, 323);
+            this.ClientSize = new System.Drawing.Size(678, 399);
+            this.Controls.Add(this.buttonRecargar);
+            this.Controls.Add(this.button_buscar);
+            this.Controls.Add(this.textBox_buscar);
             this.Controls.Add(this.listView1);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
@@ -107,6 +141,7 @@
             this.Text = "UsuariosLista";
             this.Load += new System.EventHandler(this.UsuariosLista_Load);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -118,5 +153,8 @@
         private System.Windows.Forms.ColumnHeader columnHeader3;
         private System.Windows.Forms.ColumnHeader columnHeader1;
         private System.Windows.Forms.ColumnHeader Vuelo;
+        private System.Windows.Forms.TextBox textBox_buscar;
+        private System.Windows.Forms.Button button_buscar;
+        private System.Windows.Forms.Button buttonRecargar;
     }
 }

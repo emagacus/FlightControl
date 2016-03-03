@@ -16,12 +16,12 @@ namespace WindowsFormsApplication2
 
       
 
-        List<Vuelo> listaVuelos = new List<Vuelo>();
+        ListaVuelos listaVuelos = new ListaVuelos();
         
 
         Vuelo vuelo = new Vuelo();
 
-        public Principal(ref List<Vuelo> listaVuelos)
+        public Principal(ref ListaVuelos listaVuelos)
         {
             
             InitializeComponent();

@@ -15,35 +15,19 @@ namespace WindowsFormsApplication2
     public partial class UsuariosLista : Form
     {
 
-        List<Vuelo> listaVuelos = new List<Vuelo>();
+        ListaVuelos listaVuelos = new ListaVuelos();
         int VueloId = new int();
         
         
-        public UsuariosLista(ref List<Vuelo> listaVuelos)
+        public UsuariosLista(ref ListaVuelos listaVuelos)
         {
 
             InitializeComponent();
+            button_buscar.Enabled = false;
             VueloId = 0;
             button1.Enabled = false;
             this.listaVuelos = listaVuelos;
-            foreach (Vuelo v in listaVuelos)
-                
-            {
-
-              
-                foreach(Usuario u in v.userlist)
-                {
-
-                    string[] datos = u.ToString().Split('|');
-               
-                    ListViewItem item = new ListViewItem(datos);
-                    item.SubItems.Add(VueloId.ToString());
-                    listView1.Items.Add(item);
-                    
-                }
-
-                VueloId++;
-            }
+            refreshListview();
 
        //     if (userList.Items.Count <= 0)
          //   {
@@ -52,6 +36,30 @@ namespace WindowsFormsApplication2
 
 
 
+        }
+
+
+        private void refreshListview()
+        {
+            listView1.Items.Clear();
+            foreach (Vuelo v in listaVuelos)
+
+            {
+
+
+                foreach (Usuario u in v.userlist)
+                {
+
+                    string[] datos = u.ToString().Split('|');
+
+                    ListViewItem item = new ListViewItem(datos);
+                    item.SubItems.Add(VueloId.ToString());
+                    listView1.Items.Add(item);
+
+                }
+
+                VueloId++;
+            }
         }
 
         private void UsuariosLista_Load(object sender, EventArgs e)
@@ -93,6 +101,7 @@ namespace WindowsFormsApplication2
                 if (listView1.Items.Count == 0)
                 {
                     button1.Enabled = false;
+                    button_buscar.Enabled = false;
                 }
                  
             }
@@ -113,6 +122,47 @@ namespace WindowsFormsApplication2
             {
                 this.button1.Enabled = true;
             }
+        }
+
+        private void textBox_buscar_TextChanged(object sender, EventArgs e)
+        {
+            if(textBox_buscar.Text!=null && listView1.Items.Count > 0)
+            {
+                button_buscar.Enabled = true;
+            }
+        }
+
+        private void button_buscar_Click(object sender, EventArgs e)
+        {
+            int x = 0;
+            
+            foreach (ListViewItem i in listView1.Items)
+            {
+                string itemstr=new string(' ',1);
+                foreach (ListViewItem.ListViewSubItem s in i.SubItems)
+                {
+             
+                    itemstr =itemstr + s.ToString();
+                }
+
+               
+
+                if (itemstr.IndexOf(textBox_buscar.Text.ToString(),StringComparison.OrdinalIgnoreCase) <= 0)
+                    //!itemstr.Contains(textBox_buscar.Text))
+                {
+                    listView1.Items.RemoveAt(x);
+                    x--;
+                }
+
+                x++;
+            }
+
+            button_buscar.Enabled = false;
+        }
+
+        private void buttonRecargar_Click(object sender, EventArgs e)
+        {
+            refreshListview();
         }
     }
 }

@@ -42,7 +42,8 @@ namespace WindowsFormsApplication2
 
         }
 
-        public Vuelo(int AsientosDisp,string od,string ruta,int costo, int tiempo)
+
+        public Vuelo(int AsientosDisp,string od,string ruta,int costo, int tiempo,DateTime date)
         {
             origen = od[0];
             destino = od[1];
@@ -51,19 +52,9 @@ namespace WindowsFormsApplication2
             this.tiempo = tiempo;
             AsientosDisp = 30;
             this.AsientosDisp = AsientosDisp;
-            var ran = new Random();
 
-           
-            int d = ran.Next(1, 28);
-            int m = ran.Next(1, 12);
-            int hr = ran.Next(0, 24);
-            int min = ran.Next(0, 60);
-            int sec = ran.Next(0, 60);     
-           
+            this.date = date; 
 
-            date = new DateTime(2016, m, d,hr,min,sec);
-
-            System.Threading.Thread.Sleep(50);
         }
 
 
@@ -73,6 +64,8 @@ namespace WindowsFormsApplication2
         public int getTiempo() { return this.origen; }
         public string getRuta() { return this.ruta; }
         public bool getAsientos(int n) { return this.asientos[n]; }
+        public DateTime getFecha() { return date; }
+
         public void setAsientoTomado(int a)
         {
             if (!asientos[a - 1])

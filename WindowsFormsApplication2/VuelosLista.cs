@@ -15,11 +15,11 @@ namespace WindowsFormsApplication2
     {
 
 
-        List<Vuelo> listaVuelos = new List<Vuelo>();
+        ListaVuelos listaVuelos = new ListaVuelos();
         
         
 
-        public VuelosLista(ref List<Vuelo> listaVuelos)
+        public VuelosLista(ref ListaVuelos listaVuelos)
         {
             
             InitializeComponent();
@@ -27,15 +27,17 @@ namespace WindowsFormsApplication2
             Buscar.Enabled = false;
             this.listaVuelos = listaVuelos;
 
-         
 
-           
 
-            for(int x = 0; x < this.listaVuelos.Count; x++)
+
+            int index = 0;
+            foreach(Vuelo v in listaVuelos)
             {
-
-                listBox1.Items.Add(this.listaVuelos[x].ToString());
-                
+                string[] datav = v.ToString('|').Split('|');
+                ListViewItem dv = new ListViewItem(datav);
+                dv.SubItems.Add(index.ToString());
+                listView1.Items.Add(dv);
+                index++;
             }
 
 
@@ -43,14 +45,26 @@ namespace WindowsFormsApplication2
         }
 
   
-
+        private void RefreshListView()
+        {
+            listView1.Items.Clear();
+            int index = 0;
+            foreach (Vuelo v in listaVuelos)
+            {
+                string[] datav = v.ToString('|').Split('|');
+                ListViewItem dv = new ListViewItem(datav);
+                dv.SubItems.Add(index.ToString());
+                listView1.Items.Add(dv);
+                index++;
+            }
+        }
 
         private void button1_Click(object sender, EventArgs e)
         {
             
             
-            this.listBox1.SelectedItem.ToString();
-            Console.WriteLine(this.listBox1.SelectedItem.ToString());
+            this.listView1.FocusedItem.ToString();
+            Console.WriteLine(this.listView1.FocusedItem.ToString());
          
             //   Registro ventanaRegistro = new Registro(this.listBox1.SelectedItem.ToString());
            // ventanaRegistro.ShowDialog();
@@ -59,7 +73,7 @@ namespace WindowsFormsApplication2
 
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (this.listBox1.SelectedItem.ToString() != null) {
+            if (this.listView1.FocusedItem.ToString() != null) {
                 this.button2.Enabled = true;
             }
         }
@@ -74,8 +88,8 @@ namespace WindowsFormsApplication2
         {
             Vuelo temp;
             string svuelo;
-            svuelo = listBox1.SelectedItem.ToString();
-            temp = listaVuelos[listBox1.SelectedIndex];
+            svuelo = listView1.FocusedItem.SubItems[2].Text;
+            temp = listaVuelos[int.Parse(listView1.FocusedItem.SubItems[6].Text)];
             this.Hide();
             SeleccionAsiento ventanaAsientos = new SeleccionAsiento(ref temp,ref svuelo);
             ventanaAsientos.ShowDialog();
@@ -85,157 +99,25 @@ namespace WindowsFormsApplication2
         private void button1_Click_1(object sender, EventArgs e)
         {
 
-            qksortbySeat(ref listaVuelos, 0, listaVuelos.Count - 1);
-            listBox1.Items.Clear();
-            for (int x = 0; x < this.listaVuelos.Count; x++)
-            {
+            listaVuelos.SortBySeats(0, listaVuelos.Count - 1);
+            listView1.Items.Clear();
 
-                listBox1.Items.Add(listaVuelos[x].ToString());
-
-            }
+            RefreshListView();
 
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
             
-            qksortbyDate(ref listaVuelos, 0, listaVuelos.Count-1);
-            listBox1.Items.Clear();
-            for (int x = 0; x < this.listaVuelos.Count; x++)
-            {
+            listaVuelos.SortByDate(0, listaVuelos.Count-1);
+            listView1.Items.Clear();
 
-                listBox1.Items.Add(listaVuelos[x].ToString());
-
-            }
+            RefreshListView();
 
         }
 
-
-
-        private int divideListByDate(ref List<Vuelo> listavuelos,int start, int end)
-        {
-            int left;
-            int right;
-            Vuelo pivot;
-            Vuelo temp;
-
-                   pivot = listavuelos[start];
-            left = start;
-            right = end;
-
-            // Mientras no se cruzen los índices
-            while (left < right)
-            {
-                while (listavuelos[right].getDate() > pivot.getDate())
-                {
-                    right--;
-                }
-
-                while ((left < right) && (listaVuelos[left].getDate() <= pivot.getDate()))
-                {
-                    left++;
-                }
-
-                // Si todavía no se cruzan los indices seguimos intercambiando
-                if (left < right)
-                {
-                    temp = listaVuelos[left];
-                    listavuelos[left] = listavuelos[right];
-                    listavuelos[right] = temp;
-                }
-            }
-
-            // Los índices ya se han cruzado, ponemos el pivot en el lugar que le corresponde
-            temp = listavuelos[right];
-            listavuelos[right] = listavuelos[start];
-            listavuelos[start] = temp;
-
-            // La nueva posición del pivot
-            return right;
-
-        }
-
-
-
-        private int divideListBySeat(ref List<Vuelo> listavuelos, int start, int end)
-        {
-            int left;
-            int right;
-            Vuelo pivot;
-            Vuelo temp;
-
-            pivot = listavuelos[start];
-            left = start;
-            right = end;
-
-            // Mientras no se cruzen los índices
-            while (left < right)
-            {
-                while (listavuelos[right].getAsientosDisp() > pivot.getAsientosDisp())
-                {
-                    right--;
-                }
-
-                while ((left < right) && (listaVuelos[left].getAsientosDisp() <= pivot.getAsientosDisp()))
-                {
-                    left++;
-                }
-
-                // Si todavía no se cruzan los indices seguimos intercambiando
-                if (left < right)
-                {
-                    temp = listaVuelos[left];
-                    listavuelos[left] = listavuelos[right];
-                    listavuelos[right] = temp;
-                }
-            }
-
-            // Los índices ya se han cruzado, ponemos el pivot en el lugar que le corresponde
-            temp = listavuelos[right];
-            listavuelos[right] = listavuelos[start];
-            listavuelos[start] = temp;
-
-            // La nueva posición del pivot
-            return right;
-
-        }
-
-
-
-
-        private void qksortbySeat(ref List<Vuelo> listaVuelos,int start,int end)
-        {
-            int pivot;
-
-            if (start < end)
-            {
-                pivot = divideListBySeat(ref listaVuelos, start, end);
-
-                // Ordeno la lista de los menores
-                qksortbySeat(ref listaVuelos, start, pivot - 1);
-
-                // Ordeno la lista de los mayores
-                qksortbySeat(ref listaVuelos, pivot + 1, end);
-            }
-        }
-
-
-        private void qksortbyDate(ref List<Vuelo> listaVuelos, int start, int end)
-        {
-            int pivot;
-
-            if (start < end)
-            {
-                pivot = divideListByDate(ref listaVuelos, start, end);
-
-                // Ordeno la lista de los menores
-                qksortbyDate(ref listaVuelos, start, pivot - 1);
-
-                // Ordeno la lista de los mayores
-                qksortbyDate(ref listaVuelos, pivot + 1, end);
-            }
-        }
-
+        
+        
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
             if (textBox1.Text != null)
@@ -244,18 +126,99 @@ namespace WindowsFormsApplication2
             }
         }
 
+
+
         private void Buscar_Click(object sender, EventArgs e)
         {
-            listBox1.Items.Clear();
+            
+
+            RefreshListView();
+            
+
+
+            int index = 0;
+            string mystring;
+
+            foreach(Vuelo v  in listaVuelos)
+            {
+                mystring = v.ToString();
+                if ( mystring.IndexOf(textBox1.Text.ToString(),StringComparison.OrdinalIgnoreCase) <= 0)
+                    //!v.ToString().Contains(textBox1.Text.ToString()))
+                {
+
+                  listView1.Items.RemoveAt(index);
+                  index--;
+
+                }
+
+                index++;
+                }//fin foreach
+
+        }
+
+        private void listView1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (this.listView1.SelectedItems.ToString() != null)
+            {
+                this.button2.Enabled = true;
+            }
+        }
+
+        private void Button_delete_Click(object sender, EventArgs e)
+        {
+
+
+            if (listView1.FocusedItem != null)
+            {
+
+                listaVuelos.RemoveAt(int.Parse(listView1.FocusedItem.SubItems[6].Text));
+                listView1.Items.Clear();
+
+
+                RefreshListView();
+
+            }//fin if
+
+        }
+
+        private void button_agregar_Click(object sender, EventArgs e)
+        {
+            RegVuelos regvuelo = new RegVuelos(ref listaVuelos);
+            regvuelo.ShowDialog();
+            RefreshListView();
+        }
+
+        private void refreshButton_Click(object sender, EventArgs e)
+        {
+            RefreshListView();
+        }
+
+
+        private void ButtonActualizar_Click(object sender, EventArgs e)
+        {
+            DateTime currentdate = DateTime.Now;
+            Console.WriteLine(currentdate.ToString());
+            int index = 0;
+            List<int> listindex=new List<int>();
 
             foreach(Vuelo v in listaVuelos)
             {
-                if (v.ToString().Contains(textBox1.Text.ToString()))
+                if (DateTime.Compare(v.getFecha(), currentdate) < 0)
                 {
-                    listBox1.Items.Add(v.ToString());
+                    listindex.Add(index);
                 }
-                }//fin foreach
+                index++;
+            }
 
+            int temp = 0;
+
+            foreach(int i in listindex)
+            {
+                listaVuelos.RemoveAt(i - temp);
+                temp++;
+            }
+
+            RefreshListView();
         }
     }
 }

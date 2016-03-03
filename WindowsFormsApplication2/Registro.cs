@@ -12,7 +12,7 @@ namespace WindowsFormsApplication2
 {
     public partial class Registro : Form
     {
-        string vuelo, asiento; int No_asiento;
+        string  asiento; int No_asiento;
         Vuelo vueloObject;
         
 
@@ -21,14 +21,13 @@ namespace WindowsFormsApplication2
             InitializeComponent();
         }
 
-        public Registro(string vuelo,string asiento,int No_asiento, ref Vuelo vueloObject)
+        public Registro(string asiento,int No_asiento, ref Vuelo vueloObject)
         {
             this.vueloObject = vueloObject;
-            this.vuelo = vuelo;
             this.asiento = asiento;
             this.No_asiento = No_asiento;
             InitializeComponent();
-            this.vuelo_textBox.Text = vuelo;
+            vuelo_textBox.Text = vueloObject.ToString().Substring(3);
             this.vuelo_textBox.Enabled = false;
             this.textBox2.Text = asiento;
             this.textBox2.Enabled = false;
@@ -45,7 +44,7 @@ namespace WindowsFormsApplication2
         private void button1_Click(object sender, EventArgs e)
         {
             vueloObject.setAsientoTomado(No_asiento);
-            Usuario user = new Usuario(textBox3.Text, textBox4.Text, vuelo ,No_asiento);
+            Usuario user = new Usuario(textBox3.Text, textBox4.Text,vuelo_textBox.Text ,No_asiento);
             vueloObject.userlist.Add(user);
             this.Close();
         }
