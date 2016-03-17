@@ -17,15 +17,16 @@ namespace WindowsFormsApplication2
       
 
         ListaVuelos listaVuelos = new ListaVuelos();
-        
+        ListaCiudades listaciudades = new ListaCiudades();
 
         Vuelo vuelo = new Vuelo();
 
-        public Principal(ref ListaVuelos listaVuelos)
+        public Principal(ref ListaVuelos listaVuelos,ref ListaCiudades listaciudades)
         {
             
             InitializeComponent();
             this.listaVuelos = listaVuelos;
+            this.listaciudades = listaciudades;
     
 
         }
@@ -46,7 +47,7 @@ namespace WindowsFormsApplication2
         private void button1_Click(object sender, EventArgs e)
         {
             Console.WriteLine("button clicked");
-            VuelosLista ventanaVuelos = new VuelosLista(ref listaVuelos);
+            VuelosLista ventanaVuelos = new VuelosLista(ref listaVuelos,ref listaciudades);
             ventanaVuelos.ShowDialog();
         }
 
@@ -56,9 +57,10 @@ namespace WindowsFormsApplication2
             userlistwindow.ShowDialog();
        }
 
-
-        
-       
-
+        private void rutasbutton_Click(object sender, EventArgs e)
+        {
+            GrafoVisual grafo = new GrafoVisual(ref listaciudades, ref listaVuelos);
+            grafo.ShowDialog();
+        }
     }
 }

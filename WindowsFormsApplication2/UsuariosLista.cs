@@ -139,12 +139,7 @@ namespace WindowsFormsApplication2
             foreach (ListViewItem i in listView1.Items)
             {
                 string itemstr=new string(' ',1);
-                foreach (ListViewItem.ListViewSubItem s in i.SubItems)
-                {
-             
-                    itemstr =itemstr + s.ToString();
-                }
-
+                itemstr = i.SubItems[0].ToString()+ i.SubItems[1].ToString();
                
 
                 if (itemstr.IndexOf(textBox_buscar.Text.ToString(),StringComparison.OrdinalIgnoreCase) <= 0)

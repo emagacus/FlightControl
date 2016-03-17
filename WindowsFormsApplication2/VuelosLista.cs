@@ -16,17 +16,18 @@ namespace WindowsFormsApplication2
 
 
         ListaVuelos listaVuelos = new ListaVuelos();
-        
+        ListaCiudades listaciudades = new ListaCiudades();
         
 
-        public VuelosLista(ref ListaVuelos listaVuelos)
+        public VuelosLista(ref ListaVuelos listaVuelos,ref ListaCiudades listaciudades)
         {
             
             InitializeComponent();
 
             Buscar.Enabled = false;
             this.listaVuelos = listaVuelos;
-
+            this.listaciudades = listaciudades;
+            Button_delete.Enabled = false;
 
 
 
@@ -75,6 +76,7 @@ namespace WindowsFormsApplication2
         {
             if (this.listView1.FocusedItem.ToString() != null) {
                 this.button2.Enabled = true;
+             
             }
         }
 
@@ -141,7 +143,7 @@ namespace WindowsFormsApplication2
 
             foreach(Vuelo v  in listaVuelos)
             {
-                mystring = v.ToString();
+                mystring = v.ToString() ;
                 if ( mystring.IndexOf(textBox1.Text.ToString(),StringComparison.OrdinalIgnoreCase) <= 0)
                     //!v.ToString().Contains(textBox1.Text.ToString()))
                 {
@@ -160,7 +162,8 @@ namespace WindowsFormsApplication2
         {
             if (this.listView1.SelectedItems.ToString() != null)
             {
-                this.button2.Enabled = true;
+                button2.Enabled = true;
+                Button_delete.Enabled = true;
             }
         }
 
@@ -171,9 +174,10 @@ namespace WindowsFormsApplication2
             if (listView1.FocusedItem != null)
             {
 
+                listaciudades.deletArista(listaVuelos[int.Parse(listView1.FocusedItem.SubItems[6].Text)].getOrigen().ToString(), listaVuelos[int.Parse(listView1.FocusedItem.SubItems[6].Text)].getDestino().ToString());
                 listaVuelos.RemoveAt(int.Parse(listView1.FocusedItem.SubItems[6].Text));
                 listView1.Items.Clear();
-
+                 
 
                 RefreshListView();
 
@@ -183,7 +187,7 @@ namespace WindowsFormsApplication2
 
         private void button_agregar_Click(object sender, EventArgs e)
         {
-            RegVuelos regvuelo = new RegVuelos(ref listaVuelos);
+            RegVuelos regvuelo = new RegVuelos(ref listaVuelos,ref listaciudades);
             regvuelo.ShowDialog();
             RefreshListView();
         }

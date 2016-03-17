@@ -34,6 +34,7 @@
         {
             this.vuelosButton = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
+            this.rutasbutton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // vuelosButton
@@ -56,11 +57,22 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click_1);
             // 
+            // rutasbutton
+            // 
+            this.rutasbutton.Location = new System.Drawing.Point(12, 98);
+            this.rutasbutton.Name = "rutasbutton";
+            this.rutasbutton.Size = new System.Drawing.Size(75, 23);
+            this.rutasbutton.TabIndex = 2;
+            this.rutasbutton.Text = "Rutas";
+            this.rutasbutton.UseVisualStyleBackColor = true;
+            this.rutasbutton.Click += new System.EventHandler(this.rutasbutton_Click);
+            // 
             // Principal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(368, 368);
+            this.Controls.Add(this.rutasbutton);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.vuelosButton);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
@@ -75,6 +87,7 @@
 
         private System.Windows.Forms.Button vuelosButton;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button rutasbutton;
     }
 }
 

@@ -39,6 +39,7 @@
             this.button_accept = new System.Windows.Forms.Button();
             this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
             this.label4 = new System.Windows.Forms.Label();
+            this.buttonHelp = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).BeginInit();
             this.SuspendLayout();
@@ -135,11 +136,22 @@
             this.label4.TabIndex = 10;
             this.label4.Text = "Hora de Salida";
             // 
+            // buttonHelp
+            // 
+            this.buttonHelp.Location = new System.Drawing.Point(218, 38);
+            this.buttonHelp.Name = "buttonHelp";
+            this.buttonHelp.Size = new System.Drawing.Size(57, 22);
+            this.buttonHelp.TabIndex = 11;
+            this.buttonHelp.Text = "Ayuda";
+            this.buttonHelp.UseVisualStyleBackColor = true;
+            this.buttonHelp.Click += new System.EventHandler(this.buttonHelp_Click);
+            // 
             // RegVuelos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(304, 310);
+            this.Controls.Add(this.buttonHelp);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.dateTimePicker2);
             this.Controls.Add(this.button_accept);
@@ -151,6 +163,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.numericUpDown1);
             this.Controls.Add(this.textBox1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "RegVuelos";
             this.Text = "RegVuelos";
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
@@ -173,5 +186,6 @@
         private System.Windows.Forms.Button button_accept;
         private System.Windows.Forms.DateTimePicker dateTimePicker2;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Button buttonHelp;
     }
 }
