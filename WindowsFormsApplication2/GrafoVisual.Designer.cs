@@ -82,6 +82,7 @@
             this.Controls.Add(this.buttonDelete);
             this.Controls.Add(this.listView1);
             this.Controls.Add(this.pictureBox1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "GrafoVisual";
             this.Text = "GrafoVisual";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();

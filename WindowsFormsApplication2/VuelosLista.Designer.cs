@@ -130,12 +130,12 @@
             // 
             // columnHeader3
             // 
-            this.columnHeader3.Text = "Costo";
+            this.columnHeader3.Text = "Tiempo";
             this.columnHeader3.Width = 120;
             // 
             // columnHeader4
             // 
-            this.columnHeader4.Text = "Tiempo";
+            this.columnHeader4.Text = "Costo";
             this.columnHeader4.Width = 115;
             // 
             // columnHeader5
