@@ -35,6 +35,9 @@
             this.buttonKrus = new System.Windows.Forms.Button();
             this.primButton = new System.Windows.Forms.Button();
             this.RecargaGrafoButton = new System.Windows.Forms.Button();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.checkBoxCosto = new System.Windows.Forms.CheckBox();
+            this.checkBoxTiempo = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -70,7 +73,7 @@
             // 
             this.buttonDelete.Location = new System.Drawing.Point(739, 576);
             this.buttonDelete.Name = "buttonDelete";
-            this.buttonDelete.Size = new System.Drawing.Size(103, 28);
+            this.buttonDelete.Size = new System.Drawing.Size(103, 74);
             this.buttonDelete.TabIndex = 2;
             this.buttonDelete.Text = "Eliminar";
             this.buttonDelete.UseVisualStyleBackColor = true;
@@ -88,7 +91,7 @@
             // 
             // primButton
             // 
-            this.primButton.Location = new System.Drawing.Point(84, 576);
+            this.primButton.Location = new System.Drawing.Point(95, 576);
             this.primButton.Name = "primButton";
             this.primButton.Size = new System.Drawing.Size(75, 23);
             this.primButton.TabIndex = 4;
@@ -98,7 +101,7 @@
             // 
             // RecargaGrafoButton
             // 
-            this.RecargaGrafoButton.Location = new System.Drawing.Point(165, 576);
+            this.RecargaGrafoButton.Location = new System.Drawing.Point(186, 576);
             this.RecargaGrafoButton.Name = "RecargaGrafoButton";
             this.RecargaGrafoButton.Size = new System.Drawing.Size(75, 23);
             this.RecargaGrafoButton.TabIndex = 5;
@@ -106,11 +109,43 @@
             this.RecargaGrafoButton.UseVisualStyleBackColor = true;
             this.RecargaGrafoButton.Click += new System.EventHandler(this.RecargaGrafoButton_Click);
             // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(3, 622);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(258, 20);
+            this.textBox1.TabIndex = 6;
+            // 
+            // checkBoxCosto
+            // 
+            this.checkBoxCosto.AutoSize = true;
+            this.checkBoxCosto.Location = new System.Drawing.Point(3, 602);
+            this.checkBoxCosto.Name = "checkBoxCosto";
+            this.checkBoxCosto.Size = new System.Drawing.Size(97, 17);
+            this.checkBoxCosto.TabIndex = 7;
+            this.checkBoxCosto.Text = "ARM por costo";
+            this.checkBoxCosto.UseVisualStyleBackColor = true;
+            this.checkBoxCosto.CheckedChanged += new System.EventHandler(this.checkBoxCosto_CheckedChanged);
+            // 
+            // checkBoxTiempo
+            // 
+            this.checkBoxTiempo.AutoSize = true;
+            this.checkBoxTiempo.Location = new System.Drawing.Point(95, 602);
+            this.checkBoxTiempo.Name = "checkBoxTiempo";
+            this.checkBoxTiempo.Size = new System.Drawing.Size(102, 17);
+            this.checkBoxTiempo.TabIndex = 8;
+            this.checkBoxTiempo.Text = "ARM por tiempo";
+            this.checkBoxTiempo.UseVisualStyleBackColor = true;
+            this.checkBoxTiempo.CheckedChanged += new System.EventHandler(this.checkBoxTiempo_CheckedChanged);
+            // 
             // GrafoVisual
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(845, 607);
+            this.ClientSize = new System.Drawing.Size(845, 652);
+            this.Controls.Add(this.checkBoxTiempo);
+            this.Controls.Add(this.checkBoxCosto);
+            this.Controls.Add(this.textBox1);
             this.Controls.Add(this.RecargaGrafoButton);
             this.Controls.Add(this.primButton);
             this.Controls.Add(this.buttonKrus);
@@ -122,6 +157,7 @@
             this.Text = "GrafoVisual";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -134,5 +170,8 @@
         private System.Windows.Forms.Button buttonKrus;
         private System.Windows.Forms.Button primButton;
         private System.Windows.Forms.Button RecargaGrafoButton;
+        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.CheckBox checkBoxCosto;
+        private System.Windows.Forms.CheckBox checkBoxTiempo;
     }
 }

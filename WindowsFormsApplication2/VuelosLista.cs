@@ -218,6 +218,7 @@ namespace WindowsFormsApplication2
 
             foreach(int i in listindex)
             {
+                listaciudades.deletArista(listaVuelos[i - temp].getOrigen().ToString(), listaVuelos[i - temp].getDestino().ToString());
                 listaVuelos.RemoveAt(i - temp);
                 temp++;
             }

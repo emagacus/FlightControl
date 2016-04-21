@@ -26,9 +26,13 @@ namespace WindowsFormsApplication2
         ListaCiudades listaciudades = new ListaCiudades();
         
 
+
+
+
         public GrafoVisual(ref ListaCiudades listaciudades, ref ListaVuelos listaVuelos)
         {
             InitializeComponent();
+            checkBoxCosto.Checked = true;
             this.listaVuelos = listaVuelos;
             buttonDelete.Enabled = false;
             this.listaciudades = listaciudades;
@@ -79,12 +83,13 @@ namespace WindowsFormsApplication2
 
             void drawArm(ref List<AristaCiudad> arm)
              {
-          //  g.Clear(Color.AliceBlue);
+            //  g.Clear(Color.AliceBlue);
+            int costoTotal=0;int TiempoTotal = 0;
 
             pictureBox1.Image = Properties.Resources.mapa;
             pictureBox1.Image = new Bitmap(pictureBox1.Image);
             g = Graphics.FromImage(pictureBox1.Image);
-
+            penarrow.Color = Color.FromArgb(255, Color.Green);
 
 
             foreach (AristaCiudad a in arm) {
@@ -93,7 +98,13 @@ namespace WindowsFormsApplication2
                 {
                     if (c.getName() == a.getOrigen()  || c.getName() == a.getDest())
                     {
-                        g.DrawLine(penarrow, a.X, a.Y, c.X, c.Y);
+                        if (c.X != a.X)
+                        {
+                            g.DrawLine(penarrow, a.X, a.Y, c.X, c.Y);
+                            g.DrawString(a.getCosto().ToString() + "  " + a.getTiempo().ToString(), new Font("Tahoma", 8), Brushes.Blue, calcMedPoint(a.X, c.X), calcMedPoint(a.Y, c.Y));
+                            costoTotal = costoTotal + a.getCosto();
+                            TiempoTotal = TiempoTotal + a.getTiempo();
+                        }
                     }
                 }
                     }
@@ -103,6 +114,9 @@ namespace WindowsFormsApplication2
                 g.DrawEllipse(pen1, c.X, c.Y, 10, 10);
                 g.DrawString(c.getName(), new Font("Tahoma", 8), Brushes.White, c.X, c.Y);
             }
+
+
+            textBox1.Text = "Costo total: "+costoTotal.ToString() + " Tiempo Total: " + TiempoTotal.ToString();
 
             }
 
@@ -130,7 +144,7 @@ namespace WindowsFormsApplication2
 
             foreach (AristaCiudad a in Prim)
             {
-                Console.WriteLine(a.getOrigen() + " " + a.getDest() + " " + a.getCosto());
+                Console.WriteLine(a.getOrigen() + " " + a.getDest() + " " + a.getTiempo());
             }
 
 
@@ -195,7 +209,9 @@ namespace WindowsFormsApplication2
                 }
             }
 
-           aristas.Sort((x, y) => x.getTiempo().CompareTo(y.getTiempo()));
+            if (checkBoxTiempo.Checked == true) { aristas.Sort((x, y) => x.getTiempo().CompareTo(y.getTiempo())); } else
+            { aristas.Sort((x, y) => x.getCosto().CompareTo(y.getCosto())); }
+          
 
             //
 
@@ -276,7 +292,7 @@ namespace WindowsFormsApplication2
                 }
             }
               
-
+           
             //
 
             //Empiezo con el primer nodo
@@ -309,7 +325,7 @@ namespace WindowsFormsApplication2
                 }//for ciudades
 
 
-                aristasposibles.Sort((x, y) => x.getCosto().CompareTo(y.getCosto()));
+              
                 //  Console.WriteLine(aristasposibles[0].getDest().ToString() + aristasposibles[0].getCosto().ToString());
 
                 //*******En caso de ser no conexo
@@ -354,12 +370,17 @@ namespace WindowsFormsApplication2
                         return Arm;
                     }//fin else 
                 }
-                
 
 
-                    //
 
-                    compConexos = compConexos + aristasposibles[0].getDest().ToString();
+                //
+                if (checkBoxCosto.Checked == true) { aristasposibles.Sort((x, y) => x.getCosto().CompareTo(y.getCosto())); }
+                else
+                {
+                    aristasposibles.Sort((x, y) => x.getTiempo().CompareTo(y.getTiempo()));
+                }
+
+                compConexos = compConexos + aristasposibles[0].getDest().ToString();
                     Console.WriteLine("conjunto L: " + compConexos);
                     foreach (CiudadNodo c in listaciudades) { if (aristasposibles[0].getDest() == c.getName()) { Nododisp.Add(c); } }
                     nArista++;
@@ -402,6 +423,7 @@ namespace WindowsFormsApplication2
         public GrafoVisual(ref ListaCiudades listaciudades,string name)
         {
             InitializeComponent();
+            
             buttonDelete.Enabled = false;
             this.listaciudades = listaciudades;
             refreshListView();
@@ -568,21 +590,32 @@ namespace WindowsFormsApplication2
 
 
             listView1.Clear();
+           
+            RecargarGrafo();
             refreshListView();
-            
             this.Close();
         }
 
         private void buttonKrus_Click(object sender, EventArgs e)
         {
+            
             List<AristaCiudad> arm = Kruskal();
             drawArm(ref arm);
+            Console.WriteLine("-------Kruskal Realizado------");
+
+            arm.Clear();
         }
 
         private void primButton_Click(object sender, EventArgs e)
         {
+          
+
             List<AristaCiudad> arm = prim();
+           
             drawArm(ref arm);
+            Console.WriteLine("-------Prim Realizado------");
+            PrintGrafoAristas();
+            arm.Clear();
         }
 
 
@@ -615,6 +648,18 @@ namespace WindowsFormsApplication2
         {
 
             RecargarGrafo();
+        }
+
+        private void checkBoxTiempo_CheckedChanged(object sender, EventArgs e)
+        {
+            checkBoxCosto.Checked = false;
+            
+        }
+
+        private void checkBoxCosto_CheckedChanged(object sender, EventArgs e)
+        {
+           checkBoxTiempo.Checked = false;
+            
         }
     }
 }
