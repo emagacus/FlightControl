@@ -25,7 +25,7 @@ namespace WindowsFormsApplication2
             {
                 foreach(AristaCiudad a in c.Aristas)
                 {
-                    if (a.getname() == s) { return false; }
+                    if (a.getDest() == s) { return false; }
                 }
             }
 
@@ -43,7 +43,7 @@ namespace WindowsFormsApplication2
                    
                     for (int indexi=0; indexi < this[indexc].Aristas.Count; indexi++)
                     {
-                        if (this[indexc].Aristas[indexi].getname() == s)
+                        if (this[indexc].Aristas[indexi].getDest() == s)
                         {
                             this[indexc].Aristas.RemoveAt(indexi);
                             indexi--;
@@ -69,7 +69,7 @@ namespace WindowsFormsApplication2
                     for(int y = 0; y < this[x].Aristas.Count; y++)
                     {
 
-                        if (this[x].Aristas[y].getname() == d)
+                        if (this[x].Aristas[y].getDest() == d)
                         {
                             this[x].Aristas.RemoveAt(y);
                             y--;
@@ -86,6 +86,8 @@ namespace WindowsFormsApplication2
             }//fin for 1
         }
 
+
+       
 
 
     }

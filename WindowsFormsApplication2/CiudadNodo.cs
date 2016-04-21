@@ -21,7 +21,7 @@ namespace WindowsFormsApplication2
 
 
 
-        string name;
+       public string name;
         public float X;
         public float Y;
        public string getName() { return name; }

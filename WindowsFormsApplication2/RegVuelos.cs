@@ -96,7 +96,7 @@ namespace WindowsFormsApplication2
                         GrafoVisual selecCity = new GrafoVisual(ref listaciudades,od[1].ToString());
                         selecCity.ShowDialog();                   
 
-                       AristaCiudad arista = new AristaCiudad(listaciudades[listaciudades.Count - 1].X, listaciudades[listaciudades.Count - 1].Y, od[1].ToString(), int.Parse(numericUpDown2.Value.ToString()), int.Parse(numericUpDown1.Value.ToString()));
+                       AristaCiudad arista = new AristaCiudad(listaciudades[listaciudades.Count - 1].X, listaciudades[listaciudades.Count - 1].Y, od[0].ToString(), od[1].ToString(), int.Parse(numericUpDown2.Value.ToString()), int.Parse(numericUpDown1.Value.ToString()));
                         listaciudades[indexO].Aristas.Add(arista);
 
                     }
@@ -104,7 +104,7 @@ namespace WindowsFormsApplication2
                     {
                         int ExisteCiudad = CiudadExiste(od[1]);
 
-                        AristaCiudad arista = new AristaCiudad(listaciudades[ExisteCiudad].X, listaciudades[ExisteCiudad].Y, od[1].ToString(), int.Parse(numericUpDown2.Value.ToString()), int.Parse(numericUpDown1.Value.ToString()));
+                        AristaCiudad arista = new AristaCiudad(listaciudades[ExisteCiudad].X, listaciudades[ExisteCiudad].Y, od[0].ToString(), od[1].ToString(), int.Parse(numericUpDown2.Value.ToString()), int.Parse(numericUpDown1.Value.ToString()));
                         listaciudades[indexO].Aristas.Add(arista);
 
                     }

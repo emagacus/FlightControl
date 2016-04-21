@@ -41,7 +41,7 @@ namespace WindowsFormsApplication2
                         String line = sr.ReadLine();
                         string[] datavuelo = line.Split('|');
                         DateTime date = DateTime.Parse(datavuelo[5]);
-                        Vuelo vuelo = new Vuelo(int.Parse(datavuelo[0]),datavuelo[1], datavuelo[2], int.Parse(datavuelo[3]), int.Parse(datavuelo[4]),date);
+                        Vuelo vuelo = new Vuelo(int.Parse(datavuelo[0]),datavuelo[1], datavuelo[2], int.Parse(datavuelo[4]), int.Parse(datavuelo[3]),date);
                         listaVuelos.Add(vuelo);
 
 
@@ -130,7 +130,7 @@ namespace WindowsFormsApplication2
                     {
                         string aline = ifile.ReadLine();
                         string[] au = aline.Split('|');
-                        AristaCiudad arista = new AristaCiudad(float.Parse(au[1]), float.Parse(au[2]), au[3], int.Parse(au[4]),int.Parse(au[5]));
+                        AristaCiudad arista = new AristaCiudad(float.Parse(au[1]), float.Parse(au[2]),au[0], au[3], int.Parse(au[4]),int.Parse(au[5]));
                         int ind = listaciudades.getcityIndex(au[0]);
                         listaciudades[ind].Aristas.Add(arista);
 
