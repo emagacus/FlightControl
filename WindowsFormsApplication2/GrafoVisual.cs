@@ -24,12 +24,7 @@ namespace WindowsFormsApplication2
 
         Graphics g;
         ListaCiudades listaciudades = new ListaCiudades();
-
-
-       
-
-
-
+        
 
         public GrafoVisual(ref ListaCiudades listaciudades, ref ListaVuelos listaVuelos)
         {
@@ -41,6 +36,7 @@ namespace WindowsFormsApplication2
 
 
             pictureBox1.Image = new Bitmap(pictureBox1.Image);
+           
 
 
             g = Graphics.FromImage(pictureBox1.Image);
@@ -71,7 +67,7 @@ namespace WindowsFormsApplication2
                 }
             }
 
-            PrintGrafoAristas();
+         
 
         }
 
@@ -79,11 +75,49 @@ namespace WindowsFormsApplication2
         //RECORRIDOS
 
 
+            //Dibujando ARM
+
+            void drawArm(ref List<AristaCiudad> arm)
+             {
+          //  g.Clear(Color.AliceBlue);
+
+            pictureBox1.Image = Properties.Resources.mapa;
+            pictureBox1.Image = new Bitmap(pictureBox1.Image);
+            g = Graphics.FromImage(pictureBox1.Image);
+
+
+
+            foreach (AristaCiudad a in arm) {
+
+                foreach (CiudadNodo c in listaciudades)
+                {
+                    if (c.getName() == a.getOrigen()  || c.getName() == a.getDest())
+                    {
+                        g.DrawLine(penarrow, a.X, a.Y, c.X, c.Y);
+                    }
+                }
+                    }
+
+            foreach(CiudadNodo c in listaciudades)
+            {
+                g.DrawEllipse(pen1, c.X, c.Y, 10, 10);
+                g.DrawString(c.getName(), new Font("Tahoma", 8), Brushes.White, c.X, c.Y);
+            }
+
+            }
+
+
+
             public void PrintGrafoAristas()
         {
+
             
+
             List<AristaCiudad> Krus = Kruskal();
             List<AristaCiudad> Prim = prim();
+
+            drawArm(ref Krus);
+           // drawArm(ref Prim);
 
             Console.WriteLine("Kruskal");
 
@@ -281,9 +315,44 @@ namespace WindowsFormsApplication2
                 //*******En caso de ser no conexo
                 if (aristasposibles.Count == 0)
                {
-                    
-                    Console.WriteLine("Early retirement");
-                   return Arm;
+
+                    if (compConexos.Length < listaciudades.Count)
+                    { foreach (CiudadNodo c in listaciudades) { if (!compConexos.Contains(c.getName())) { Nododisp.Add(c);break; } }//fin foreach para buscar nuevo nodo
+
+
+
+                        foreach (CiudadNodo c in Nododisp)
+                        {
+                            Console.WriteLine("revisando: " + c.getName());
+                            foreach (AristaCiudad a in c.Aristas)
+                            {
+                                if (!compConexos.Contains(a.getDest()))
+                                {
+
+                                    Console.WriteLine("añadido a posibles" + a.getOrigen() + a.getDest());
+                                    aristasposibles.Add(a);
+
+                                }
+                            }//for aristas
+
+
+                        }//for ciudades
+
+
+
+                    }
+
+
+
+
+                    else {
+
+                        foreach (CiudadNodo c in nodosTemp) { c.Aristas.Clear(); }
+
+                        foreach (AristaCiudad a in aristas) { foreach (CiudadNodo c in listaciudades) { if (a.getOrigen() == c.getName()) { c.Aristas.Add(a); } } }
+                        Console.WriteLine("Early retirement");
+                        return Arm;
+                    }//fin else 
                 }
                 
 
@@ -324,6 +393,10 @@ namespace WindowsFormsApplication2
                //
 
         //
+
+
+
+
 
 
         public GrafoVisual(ref ListaCiudades listaciudades,string name)
@@ -457,6 +530,7 @@ namespace WindowsFormsApplication2
 
          ~GrafoVisual()
         {
+            pictureBox1.Dispose();
             g.Dispose();
             pen1.Dispose();
             penarrow.Dispose();
@@ -497,6 +571,50 @@ namespace WindowsFormsApplication2
             refreshListView();
             
             this.Close();
+        }
+
+        private void buttonKrus_Click(object sender, EventArgs e)
+        {
+            List<AristaCiudad> arm = Kruskal();
+            drawArm(ref arm);
+        }
+
+        private void primButton_Click(object sender, EventArgs e)
+        {
+            List<AristaCiudad> arm = prim();
+            drawArm(ref arm);
+        }
+
+
+        void RecargarGrafo() {
+
+            pictureBox1.Image = Properties.Resources.mapa;
+            pictureBox1.Image = new Bitmap(pictureBox1.Image);
+            g = Graphics.FromImage(pictureBox1.Image);
+
+
+
+            foreach (CiudadNodo c in listaciudades)
+            {
+
+                g.DrawEllipse(pen1, c.X, c.Y, 10, 10);
+                g.DrawString(c.getName(), new Font("Tahoma", 8), Brushes.White, c.X, c.Y);
+
+                foreach (AristaCiudad a in c.Aristas)
+                {
+                    penarrow.Color = Color.FromArgb(100, Color.Red);
+                    g.DrawLine(penarrow, a.X, a.Y, c.X, c.Y);
+                    g.DrawString(a.getCosto().ToString() + "  " + a.getTiempo().ToString(), new Font("Tahoma", 8), Brushes.Blue, calcMedPoint(a.X, c.X), calcMedPoint(a.Y, c.Y));
+                    // g.DrawEllipse(pen1,a.X, a.Y, 10, 10);
+
+                }
+            }
+        }
+
+        private void RecargaGrafoButton_Click(object sender, EventArgs e)
+        {
+
+            RecargarGrafo();
         }
     }
 }
