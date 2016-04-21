@@ -183,6 +183,13 @@ namespace WindowsFormsApplication2
                     Arm.Add(a);
                 }
 
+                
+
+
+            }//fin foreach aristas
+
+           
+
             return Arm;
         } 
 
