@@ -49,6 +49,7 @@
   <ItemGroup>
     <Compile Include="AristaCiudad.cs" />
     <Compile Include="CiudadNodo.cs" />
+    <Compile Include="DijkstraNode.cs" />
     <Compile Include="GrafoVisual.cs">
       <SubType>Form</SubType>
     </Compile>

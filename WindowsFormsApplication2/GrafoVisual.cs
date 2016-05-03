@@ -13,6 +13,7 @@ using System.Windows.Forms;
 namespace WindowsFormsApplication2
 {
 
+ 
    
     public partial class GrafoVisual : Form
     {
@@ -179,8 +180,8 @@ namespace WindowsFormsApplication2
             int indx = 0;
             foreach(string s in compConexo)
             {
-                if (s.Contains(o)) { indices[0] = indx; Console.WriteLine("o esta aqui"); }
-                if (s.Contains(d)) { indices[1] = indx; Console.WriteLine("d esta aqui"); }
+                if (s.Contains(o) && !s.Contains(d)) { indices[0] = indx; Console.WriteLine("o esta aqui"); }
+                if (s.Contains(d) && !s.Contains(o)) { indices[1] = indx; Console.WriteLine("d esta aqui"); }
                 if (s.Contains(o) && s.Contains(d)) { indices[2] = indx; Console.WriteLine("od estan aqui"); }
 
                 indx++;
@@ -229,8 +230,13 @@ namespace WindowsFormsApplication2
                 {
                     
                     compConexos.Add(compConexos[ccs[0]] + compConexos[ccs[1]]);
-                   
+
+                    compConexos.RemoveAt(ccs[0]);
+                    
+
                     Arm.Add(a);
+                    
+
                 }
 
                 
@@ -412,6 +418,129 @@ namespace WindowsFormsApplication2
 
 
                //
+
+
+
+            //*****   DIJKSTRA      
+            
+
+                //        ****          ***        ***        *   *     *****    *****     *****      *****        // 
+               //        *   *          *          *         *  *      *   *      *       *   *      *   *        //
+              //        *    *         *          *         * *       *   *      *       *   *      *   *        //
+             //        *     *        *          *         **        *          *       *****      *****        //
+            //        *     *        *          *         **        *****      *       *  *       *   *        //
+           //        *    *         *      *   *         * *           *      *       *   *      *   *        //
+          //        *   *          *       *  *         *  *      *   *      *       *    *     *   *        //
+         //        ****          ***       ***         *   *     *****      *       *    *     *   *        //
+
+
+
+           CiudadNodo dijskUpdate(ref CiudadNodo nodoactual, ref List<DijkstraNode> caminos, ref string Definitivos)
+           {
+
+            DijkstraNode nuevo=new DijkstraNode();
+
+            foreach(DijkstraNode d in caminos) { if (d.nombre == nodoactual.name) { nuevo.peso = d.peso; } }
+
+          
+            foreach(AristaCiudad a in nodoactual.Aristas)
+            {
+
+                foreach(DijkstraNode d in caminos)
+                {
+                    if (a.getDest() == d.nombre)
+                    {
+                       
+                        if((a.getCosto()+nuevo.peso) < d.peso )
+                        {
+
+                            d.peso = a.getCosto()+nuevo.peso;
+                            d.procedencia = nodoactual;
+
+                        }
+                    }        
+                }
+
+            }//fin foreach arista
+              
+
+            
+
+           caminos.Sort((x, y) => x.peso.CompareTo(y.peso));
+            foreach(DijkstraNode d in caminos) { if (!Definitivos.Contains(d.nombre)) { nuevo = d; break; } }
+            Definitivos = Definitivos + nuevo.nombre;
+
+            foreach (CiudadNodo c in listaciudades) { if (c.getName() == nuevo.nombre) { nodoactual = c;break; } }
+                        
+            return nodoactual;
+
+        }
+
+
+            List<DijkstraNode> Dijkstra(CiudadNodo origen)
+            {
+
+            List<DijkstraNode> caminos = new List<DijkstraNode>();
+            CiudadNodo nodoActual=origen;
+            string Definitivos = "";
+            int numDef=0;
+
+
+            //Se crea el vector de caminos
+
+            foreach (CiudadNodo c in listaciudades)
+            {
+
+                DijkstraNode nodo = new DijkstraNode(c.getName(), 1000000000);
+
+                if (c.getName()==origen.getName())
+                { 
+                    nodo.peso = 0;
+                    nodo.procedencia = origen;
+                }
+
+                    caminos.Add(nodo);
+            }
+
+
+            //*** Se inicia con el origen;
+
+             Definitivos = origen.getName();
+             numDef++;
+                         
+            //***
+
+
+            while(numDef != listaciudades.Count)
+            {
+
+                dijskUpdate(ref nodoActual, ref caminos, ref Definitivos);
+                numDef++;
+                                
+            }
+
+
+
+            return caminos;
+
+            }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            //******
+
 
         //
 
@@ -660,6 +789,19 @@ namespace WindowsFormsApplication2
         {
            checkBoxTiempo.Checked = false;
             
+        }
+
+        private void buttonDijk_Click(object sender, EventArgs e)
+        {
+            List<DijkstraNode> caminos = Dijkstra(listaciudades[0]);
+
+            foreach (DijkstraNode d in caminos)
+            {
+                if (d.procedencia != null)
+                {
+                    Console.WriteLine(d.nombre + "----" + d.peso.ToString() + "from----- " + d.procedencia.name);
+                }
+                }
         }
     }
 }

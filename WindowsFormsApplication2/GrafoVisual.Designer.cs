@@ -38,6 +38,7 @@
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.checkBoxCosto = new System.Windows.Forms.CheckBox();
             this.checkBoxTiempo = new System.Windows.Forms.CheckBox();
+            this.buttonDijk = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -138,11 +139,22 @@
             this.checkBoxTiempo.UseVisualStyleBackColor = true;
             this.checkBoxTiempo.CheckedChanged += new System.EventHandler(this.checkBoxTiempo_CheckedChanged);
             // 
+            // buttonDijk
+            // 
+            this.buttonDijk.Location = new System.Drawing.Point(321, 576);
+            this.buttonDijk.Name = "buttonDijk";
+            this.buttonDijk.Size = new System.Drawing.Size(75, 23);
+            this.buttonDijk.TabIndex = 9;
+            this.buttonDijk.Text = "Dijkstra";
+            this.buttonDijk.UseVisualStyleBackColor = true;
+            this.buttonDijk.Click += new System.EventHandler(this.buttonDijk_Click);
+            // 
             // GrafoVisual
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(845, 652);
+            this.Controls.Add(this.buttonDijk);
             this.Controls.Add(this.checkBoxTiempo);
             this.Controls.Add(this.checkBoxCosto);
             this.Controls.Add(this.textBox1);
@@ -173,5 +185,6 @@
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.CheckBox checkBoxCosto;
         private System.Windows.Forms.CheckBox checkBoxTiempo;
+        private System.Windows.Forms.Button buttonDijk;
     }
 }
