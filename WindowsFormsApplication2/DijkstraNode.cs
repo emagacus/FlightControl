@@ -10,15 +10,15 @@ namespace WindowsFormsApplication2
     {
 
         public CiudadNodo procedencia;
-        public string nombre;
+        public CiudadNodo IdNodo;
         public float peso;
 
 
         public DijkstraNode() { }
 
-        public DijkstraNode(string nombre, float peso)
+        public DijkstraNode(CiudadNodo IdNodo, float peso)
         {
-            this.nombre = nombre;
+            this.IdNodo = IdNodo;
             this.peso = peso;
         }
 

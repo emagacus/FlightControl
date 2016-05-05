@@ -41,7 +41,9 @@ namespace WindowsFormsApplication2
 
 
             pictureBox1.Image = new Bitmap(pictureBox1.Image);
-           
+
+          
+            buttonDijk.Enabled = false;
 
 
             g = Graphics.FromImage(pictureBox1.Image);
@@ -54,11 +56,13 @@ namespace WindowsFormsApplication2
             penarrow.StartCap = LineCap.ArrowAnchor;
             penarrow.EndCap = LineCap.ArrowAnchor;
 
-            
+           
 
             foreach (CiudadNodo c in listaciudades)
             {
-                
+
+                comboBox1.Items.Add(c.name);
+
                 g.DrawEllipse(pen1, c.X, c.Y, 10, 10);
                 g.DrawString(c.getName(), new Font("Tahoma", 8),Brushes.White,c.X,c.Y);
 
@@ -91,7 +95,8 @@ namespace WindowsFormsApplication2
             pictureBox1.Image = new Bitmap(pictureBox1.Image);
             g = Graphics.FromImage(pictureBox1.Image);
             penarrow.Color = Color.FromArgb(255, Color.Green);
-
+            penarrow.StartCap = LineCap.ArrowAnchor;
+            penarrow.EndCap = LineCap.ArrowAnchor;
 
             foreach (AristaCiudad a in arm) {
 
@@ -134,20 +139,7 @@ namespace WindowsFormsApplication2
             drawArm(ref Krus);
            // drawArm(ref Prim);
 
-            Console.WriteLine("Kruskal");
-
-           foreach(AristaCiudad a in Krus)
-                {
-                Console.WriteLine(a.getOrigen() + " " + a.getDest() + " " + a.getTiempo());
-                }
-
-           Console.WriteLine("Prim");
-
-            foreach (AristaCiudad a in Prim)
-            {
-                Console.WriteLine(a.getOrigen() + " " + a.getDest() + " " + a.getTiempo());
-            }
-
+   
 
             //Rehaciendo Dirigido
 
@@ -156,14 +148,14 @@ namespace WindowsFormsApplication2
                 int indx = 0;
                 for (int x = 0; x < c.Aristas.Count; x++)
                 {
-                    Console.WriteLine("c: " + c.getName() + c.X.ToString() + c.Y.ToString() + "-- a: " + c.Aristas[indx].getOrigen() + c.Aristas[indx].X.ToString() + c.Aristas[indx].Y.ToString());
+
 
                     //if (c.X != c.Aristas[x].X) {
                     
 
                     indx++;
                 }
-                Console.WriteLine("\n");
+               
             }
 
             //fin de rehaciendo dirigido
@@ -180,9 +172,9 @@ namespace WindowsFormsApplication2
             int indx = 0;
             foreach(string s in compConexo)
             {
-                if (s.Contains(o) && !s.Contains(d)) { indices[0] = indx; Console.WriteLine("o esta aqui"); }
-                if (s.Contains(d) && !s.Contains(o)) { indices[1] = indx; Console.WriteLine("d esta aqui"); }
-                if (s.Contains(o) && s.Contains(d)) { indices[2] = indx; Console.WriteLine("od estan aqui"); }
+                if (s.Contains(o) && !s.Contains(d)) { indices[0] = indx; }
+                if (s.Contains(d) && !s.Contains(o)) { indices[1] = indx;  }
+                if (s.Contains(o) && s.Contains(d)) { indices[2] = indx;  }
 
                 indx++;
             }
@@ -316,12 +308,12 @@ namespace WindowsFormsApplication2
             {
                 foreach(CiudadNodo c in Nododisp)
                 {
-                    Console.WriteLine("revisando: " + c.getName());
+                   
                     foreach(AristaCiudad a in c.Aristas)
                     {
                         if (!compConexos.Contains(a.getDest())) {
 
-                            Console.WriteLine("añadido a posibles"+ a.getOrigen()+a.getDest());
+                           
                             aristasposibles.Add(a);
 
                         }
@@ -345,13 +337,13 @@ namespace WindowsFormsApplication2
 
                         foreach (CiudadNodo c in Nododisp)
                         {
-                            Console.WriteLine("revisando: " + c.getName());
+                           
                             foreach (AristaCiudad a in c.Aristas)
                             {
                                 if (!compConexos.Contains(a.getDest()))
                                 {
 
-                                    Console.WriteLine("añadido a posibles" + a.getOrigen() + a.getDest());
+                                   
                                     aristasposibles.Add(a);
 
                                 }
@@ -372,7 +364,7 @@ namespace WindowsFormsApplication2
                         foreach (CiudadNodo c in nodosTemp) { c.Aristas.Clear(); }
 
                         foreach (AristaCiudad a in aristas) { foreach (CiudadNodo c in listaciudades) { if (a.getOrigen() == c.getName()) { c.Aristas.Add(a); } } }
-                        Console.WriteLine("Early retirement");
+                       
                         return Arm;
                     }//fin else 
                 }
@@ -387,7 +379,7 @@ namespace WindowsFormsApplication2
                 }
 
                 compConexos = compConexos + aristasposibles[0].getDest().ToString();
-                    Console.WriteLine("conjunto L: " + compConexos);
+                   
                     foreach (CiudadNodo c in listaciudades) { if (aristasposibles[0].getDest() == c.getName()) { Nododisp.Add(c); } }
                     nArista++;
                     Arm.Add(aristasposibles[0]);
@@ -412,66 +404,105 @@ namespace WindowsFormsApplication2
 
             
                  return Arm;
-        }     
+        }
 
 
 
 
-               //
+        //
 
 
 
-            //*****   DIJKSTRA      
-            
-
-                //        ****          ***        ***        *   *     *****    *****     *****      *****        // 
-               //        *   *          *          *         *  *      *   *      *       *   *      *   *        //
-              //        *    *         *          *         * *       *   *      *       *   *      *   *        //
-             //        *     *        *          *         **        *          *       *****      *****        //
-            //        *     *        *          *         **        *****      *       *  *       *   *        //
-           //        *    *         *      *   *         * *           *      *       *   *      *   *        //
-          //        *   *          *       *  *         *  *      *   *      *       *    *     *   *        //
-         //        ****          ***       ***         *   *     *****      *       *    *     *   *        //
+        //*****   DIJKSTRA      
 
 
+        //        ****          ***        ***        *   *     *****    *****     *****      *****        // 
+        //        *   *          *          *         *  *      *   *      *       *   *      *   *        //
+        //        *    *         *          *         * *       *   *      *       *   *      *   *        //
+        //        *     *        *          *         **        *          *       *****      *****        //
+        //        *     *        *          *         **        *****      *       *  *       *   *        //
+        //        *    *         *      *   *         * *           *      *       *   *      *   *        //
+        //        *   *          *       *  *         *  *      *   *      *       *    *     *   *        //
+        //        ****          ***       ***         *   *     *****      *       *    *     *   *        //
 
-           CiudadNodo dijskUpdate(ref CiudadNodo nodoactual, ref List<DijkstraNode> caminos, ref string Definitivos)
-           {
 
-            DijkstraNode nuevo=new DijkstraNode();
 
-            foreach(DijkstraNode d in caminos) { if (d.nombre == nodoactual.name) { nuevo.peso = d.peso; } }
+        CiudadNodo dijskUpdate(ref CiudadNodo nodoactual, ref List<DijkstraNode> caminos, ref string Definitivos)
+        {
 
-          
-            foreach(AristaCiudad a in nodoactual.Aristas)
+            DijkstraNode nuevo = new DijkstraNode();
+
+
+
+            foreach (DijkstraNode d in caminos) { if (d.IdNodo.name == nodoactual.name) { nuevo.peso = d.peso; break; } }
+
+            if(checkBoxCosto.Checked)
+            { 
+
+            foreach (AristaCiudad a in nodoactual.Aristas)
             {
 
-                foreach(DijkstraNode d in caminos)
+                foreach (DijkstraNode d in caminos)
                 {
-                    if (a.getDest() == d.nombre)
+                    if (a.getDest() == d.IdNodo.name)
                     {
-                       
-                        if((a.getCosto()+nuevo.peso) < d.peso )
+
+                        if ((a.getCosto() + nuevo.peso) < d.peso)
                         {
 
-                            d.peso = a.getCosto()+nuevo.peso;
+                            d.peso = a.getCosto() + nuevo.peso;
                             d.procedencia = nodoactual;
 
                         }
-                    }        
+                    }
                 }
 
             }//fin foreach arista
-              
 
-            
 
-           caminos.Sort((x, y) => x.peso.CompareTo(y.peso));
-            foreach(DijkstraNode d in caminos) { if (!Definitivos.Contains(d.nombre)) { nuevo = d; break; } }
-            Definitivos = Definitivos + nuevo.nombre;
+            }
+            else  ////***Tiempo
 
-            foreach (CiudadNodo c in listaciudades) { if (c.getName() == nuevo.nombre) { nodoactual = c;break; } }
-                        
+            {
+
+                foreach (AristaCiudad a in nodoactual.Aristas)
+                {
+
+                    foreach (DijkstraNode d in caminos)
+                    {
+                        if (a.getDest() == d.IdNodo.name)
+                        {
+
+                            if ((a.getTiempo() + nuevo.peso) < d.peso)
+                            {
+
+                                d.peso = a.getTiempo() + nuevo.peso;
+                                d.procedencia = nodoactual;
+
+                            }
+                        }
+                    }
+
+                }//fin foreach arista
+
+
+
+
+                
+
+            }
+
+
+
+            caminos.Sort((x, y) => x.peso.CompareTo(y.peso));
+            foreach (DijkstraNode d in caminos) { if (!Definitivos.Contains(d.IdNodo.name)) { nodoactual = d.IdNodo; break; } }
+            Definitivos = Definitivos + nodoactual.name;
+
+
+
+
+            ///***
+
             return nodoactual;
 
         }
@@ -491,7 +522,7 @@ namespace WindowsFormsApplication2
             foreach (CiudadNodo c in listaciudades)
             {
 
-                DijkstraNode nodo = new DijkstraNode(c.getName(), 1000000000);
+                DijkstraNode nodo = new DijkstraNode(c, 1000000000);
 
                 if (c.getName()==origen.getName())
                 { 
@@ -577,7 +608,7 @@ namespace WindowsFormsApplication2
 
             foreach (CiudadNodo c in listaciudades)
             {
-                Console.WriteLine(c.getName());
+               
                 g.DrawEllipse(pen1, c.X, c.Y, 10, 10);
                 g.DrawString(c.getName(), new Font("Tahoma", 8), Brushes.White, c.X, c.Y);
 
@@ -694,10 +725,10 @@ namespace WindowsFormsApplication2
 
         private void listView1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (listView1.FocusedItem.Text != null)
-            {
+          //  if (listView1.FocusedItem.Text != null)
+            //{
                 buttonDelete.Enabled = true;
-            }
+            //}
         }
 
         private void buttonDelete_Click(object sender, EventArgs e)
@@ -727,22 +758,23 @@ namespace WindowsFormsApplication2
 
         private void buttonKrus_Click(object sender, EventArgs e)
         {
-            
+            listView2.Items.Clear();
             List<AristaCiudad> arm = Kruskal();
             drawArm(ref arm);
-            Console.WriteLine("-------Kruskal Realizado------");
+           
 
             arm.Clear();
         }
 
         private void primButton_Click(object sender, EventArgs e)
         {
-          
+
+            listView2.Items.Clear();
 
             List<AristaCiudad> arm = prim();
            
             drawArm(ref arm);
-            Console.WriteLine("-------Prim Realizado------");
+           
             PrintGrafoAristas();
             arm.Clear();
         }
@@ -775,7 +807,8 @@ namespace WindowsFormsApplication2
 
         private void RecargaGrafoButton_Click(object sender, EventArgs e)
         {
-
+            listView2.Items.Clear();
+            textBox1.Text = "";
             RecargarGrafo();
         }
 
@@ -791,17 +824,100 @@ namespace WindowsFormsApplication2
             
         }
 
+
+        private string getRutaDijkstra(DijkstraNode d, ref List<DijkstraNode> caminos)
+        {
+            string ruta = "";
+            string actualname=d.procedencia.name;
+
+            List<string> nodos=new List<string>();
+
+            nodos.Add(actualname);
+            
+            while(actualname != listaciudades[comboBox1.SelectedIndex].name)
+            {
+                foreach(DijkstraNode d1 in caminos)
+                {
+                    if (d1.IdNodo.name == actualname)
+                    {
+                        actualname = d1.procedencia.name;
+                        nodos.Add(actualname);
+
+                        break;
+                    }
+                }
+
+            }
+
+
+           for(int x = nodos.Count-1; x >= 0; x--) { ruta = ruta + nodos[x] + "->"; }
+            ruta = ruta + d.IdNodo.name;
+            return ruta;
+        }
+
+
         private void buttonDijk_Click(object sender, EventArgs e)
         {
-            List<DijkstraNode> caminos = Dijkstra(listaciudades[0]);
+
+            List<DijkstraNode> caminos = Dijkstra(listaciudades[comboBox1.SelectedIndex]);
+            textBox1.Text = "";
+
+            pictureBox1.Image = Properties.Resources.mapa;
+            pictureBox1.Image = new Bitmap(pictureBox1.Image);
+            g = Graphics.FromImage(pictureBox1.Image);
+            penarrow.Color = Color.FromArgb(200, Color.DarkGoldenrod);
+            penarrow.EndCap = LineCap.Flat;
+
+            listView2.Items.Clear();
+
+            foreach (CiudadNodo c in listaciudades)
+            {
+                g.DrawEllipse(pen1, c.X, c.Y, 10, 10);
+                g.DrawString(c.getName(), new Font("Tahoma", 8), Brushes.White, c.X, c.Y);
+            }
+
 
             foreach (DijkstraNode d in caminos)
             {
+                string[] infoDj=new string[3];
+                
                 if (d.procedencia != null)
                 {
-                    Console.WriteLine(d.nombre + "----" + d.peso.ToString() + "from----- " + d.procedencia.name);
+                    //  Console.WriteLine(d.IdNodo.name + d.IdNodo.X.ToString() +" "+ d.IdNodo.Y.ToString() + "----" + d.peso.ToString() + "from----- " + d.procedencia.name +" " +d.procedencia.X.ToString() +" "+ d.procedencia.Y.ToString());
+                    infoDj[0] = d.IdNodo.getName();
+                    infoDj[1] = d.peso.ToString();
+                    infoDj[2] = getRutaDijkstra(d, ref caminos);
+
+                    ListViewItem djitem = new ListViewItem(infoDj);
+                    listView2.Items.Add(djitem);
+
+                    g.DrawLine(penarrow, d.IdNodo.X, d.IdNodo.Y, d.procedencia.X, d.procedencia.Y);
                 }
-                }
+                else {
+                    infoDj[0] = d.IdNodo.getName();
+                    infoDj[1] = "∞";
+                    infoDj[2] = "NO HAY RUTA!";
+
+                    ListViewItem djitem = new ListViewItem(infoDj);
+                    listView2.Items.Add(djitem);
+
+                    g.DrawString("NO HAY RUTA!", new Font("Tahoma", 8), Brushes.Red, d.IdNodo.X, d.IdNodo.Y);
+                      }
+                }//fin foreach
+
+          
+
+
+        }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            buttonDijk.Enabled = true;
+        }
+
+        private void comboBox1_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = true;
         }
     }
 }
