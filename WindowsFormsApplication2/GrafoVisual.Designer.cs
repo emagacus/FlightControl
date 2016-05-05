@@ -128,9 +128,9 @@
             this.checkBoxCosto.AutoSize = true;
             this.checkBoxCosto.Location = new System.Drawing.Point(867, 47);
             this.checkBoxCosto.Name = "checkBoxCosto";
-            this.checkBoxCosto.Size = new System.Drawing.Size(89, 17);
+            this.checkBoxCosto.Size = new System.Drawing.Size(82, 17);
             this.checkBoxCosto.TabIndex = 7;
-            this.checkBoxCosto.Text = "Costo Optimo";
+            this.checkBoxCosto.Text = "Mejor Costo";
             this.checkBoxCosto.UseVisualStyleBackColor = true;
             this.checkBoxCosto.CheckedChanged += new System.EventHandler(this.checkBoxCosto_CheckedChanged);
             // 
@@ -139,9 +139,9 @@
             this.checkBoxTiempo.AutoSize = true;
             this.checkBoxTiempo.Location = new System.Drawing.Point(750, 47);
             this.checkBoxTiempo.Name = "checkBoxTiempo";
-            this.checkBoxTiempo.Size = new System.Drawing.Size(97, 17);
+            this.checkBoxTiempo.Size = new System.Drawing.Size(90, 17);
             this.checkBoxTiempo.TabIndex = 8;
-            this.checkBoxTiempo.Text = "Tiempo Optimo";
+            this.checkBoxTiempo.Text = "Mejor Tiempo";
             this.checkBoxTiempo.UseVisualStyleBackColor = true;
             this.checkBoxTiempo.CheckedChanged += new System.EventHandler(this.checkBoxTiempo_CheckedChanged);
             // 

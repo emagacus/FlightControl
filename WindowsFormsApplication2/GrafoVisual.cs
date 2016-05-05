@@ -94,6 +94,14 @@ namespace WindowsFormsApplication2
             pictureBox1.Image = Properties.Resources.mapa;
             pictureBox1.Image = new Bitmap(pictureBox1.Image);
             g = Graphics.FromImage(pictureBox1.Image);
+            g.SmoothingMode = SmoothingMode.AntiAlias;                  // The smoothing mode specifies whether lines, curves, and the edges of filled areas use smoothing (also called antialiasing). One exception is that path gradient brushes do not obey the smoothing mode. Areas filled using a PathGradientBrush are rendered the same way (aliased) regardless of the SmoothingMode property.
+            g.InterpolationMode = InterpolationMode.HighQualityBicubic; // The interpolation mode determines how intermediate values between two endpoints are calculated.
+            g.PixelOffsetMode = PixelOffsetMode.HighQuality;            // Use this property to specify either higher quality, slower rendering, or lower quality, faster rendering of the contents of this Graphics object.
+            g.TextRenderingHint = TextRenderingHint.AntiAliasGridFit;
+
+
+
+
             penarrow.Color = Color.FromArgb(255, Color.Green);
             penarrow.StartCap = LineCap.ArrowAnchor;
             penarrow.EndCap = LineCap.ArrowAnchor;
@@ -451,6 +459,7 @@ namespace WindowsFormsApplication2
                         {
 
                             d.peso = a.getCosto() + nuevo.peso;
+                                d.AristaPeso = a.getCosto();
                             d.procedencia = nodoactual;
 
                         }
@@ -477,6 +486,7 @@ namespace WindowsFormsApplication2
                             {
 
                                 d.peso = a.getTiempo() + nuevo.peso;
+                                d.AristaPeso = a.getTiempo();
                                 d.procedencia = nodoactual;
 
                             }
@@ -785,6 +795,15 @@ namespace WindowsFormsApplication2
             pictureBox1.Image = Properties.Resources.mapa;
             pictureBox1.Image = new Bitmap(pictureBox1.Image);
             g = Graphics.FromImage(pictureBox1.Image);
+            g.SmoothingMode = SmoothingMode.AntiAlias;                  // The smoothing mode specifies whether lines, curves, and the edges of filled areas use smoothing (also called antialiasing). One exception is that path gradient brushes do not obey the smoothing mode. Areas filled using a PathGradientBrush are rendered the same way (aliased) regardless of the SmoothingMode property.
+            g.InterpolationMode = InterpolationMode.HighQualityBicubic; // The interpolation mode determines how intermediate values between two endpoints are calculated.
+            g.PixelOffsetMode = PixelOffsetMode.HighQuality;            // Use this property to specify either higher quality, slower rendering, or lower quality, faster rendering of the contents of this Graphics object.
+            g.TextRenderingHint = TextRenderingHint.AntiAliasGridFit;
+
+
+            penarrow.StartCap = LineCap.ArrowAnchor;
+            penarrow.EndCap = LineCap.ArrowAnchor;
+
 
 
 
@@ -865,6 +884,16 @@ namespace WindowsFormsApplication2
             pictureBox1.Image = Properties.Resources.mapa;
             pictureBox1.Image = new Bitmap(pictureBox1.Image);
             g = Graphics.FromImage(pictureBox1.Image);
+
+
+            g.SmoothingMode = SmoothingMode.AntiAlias;                  // The smoothing mode specifies whether lines, curves, and the edges of filled areas use smoothing (also called antialiasing). One exception is that path gradient brushes do not obey the smoothing mode. Areas filled using a PathGradientBrush are rendered the same way (aliased) regardless of the SmoothingMode property.
+            g.InterpolationMode = InterpolationMode.HighQualityBicubic; // The interpolation mode determines how intermediate values between two endpoints are calculated.
+            g.PixelOffsetMode = PixelOffsetMode.HighQuality;            // Use this property to specify either higher quality, slower rendering, or lower quality, faster rendering of the contents of this Graphics object.
+            g.TextRenderingHint = TextRenderingHint.AntiAliasGridFit;
+
+
+
+
             penarrow.Color = Color.FromArgb(200, Color.DarkGoldenrod);
             penarrow.EndCap = LineCap.Flat;
 
@@ -892,6 +921,7 @@ namespace WindowsFormsApplication2
                     listView2.Items.Add(djitem);
 
                     g.DrawLine(penarrow, d.IdNodo.X, d.IdNodo.Y, d.procedencia.X, d.procedencia.Y);
+                    g.DrawString(d.AristaPeso.ToString(), new Font("Tahoma", 12), Brushes.Black, calcMedPoint(d.IdNodo.X, d.procedencia.X), calcMedPoint(d.IdNodo.Y, d.procedencia.Y));
                 }
                 else {
                     infoDj[0] = d.IdNodo.getName();

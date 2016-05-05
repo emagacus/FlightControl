@@ -12,12 +12,13 @@ namespace WindowsFormsApplication2
         public CiudadNodo procedencia;
         public CiudadNodo IdNodo;
         public float peso;
+        public float AristaPeso;
 
-
-        public DijkstraNode() { }
+        public DijkstraNode() { AristaPeso = 0; }
 
         public DijkstraNode(CiudadNodo IdNodo, float peso)
         {
+            AristaPeso = 0;
             this.IdNodo = IdNodo;
             this.peso = peso;
         }
