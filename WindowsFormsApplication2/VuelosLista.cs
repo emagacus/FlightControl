@@ -125,6 +125,31 @@ namespace WindowsFormsApplication2
             if (textBox1.Text != null)
             {
                 Buscar.Enabled = true;
+
+                RefreshListView();
+
+
+
+                int index = 0;
+                string mystring;
+
+                foreach (Vuelo v in listaVuelos)
+                {
+                    mystring = v.ToString();
+                    if (mystring.IndexOf(textBox1.Text.ToString(), StringComparison.OrdinalIgnoreCase) <= 0)
+                    //!v.ToString().Contains(textBox1.Text.ToString()))
+                    {
+
+                        listView1.Items.RemoveAt(index);
+                        index--;
+
+                    }
+
+                    index++;
+                }//fin foreach
+
+
+
             }
         }
 
@@ -200,7 +225,10 @@ namespace WindowsFormsApplication2
 
         private void ButtonActualizar_Click(object sender, EventArgs e)
         {
-            DateTime currentdate = DateTime.Now;
+            DateTime currentdate = DateTime.Now.AddHours(-DateTime.Now.Hour);
+            currentdate = currentdate.AddMinutes(-DateTime.Now.Minute);
+
+ 
             Console.WriteLine(currentdate.ToString());
             int index = 0;
             List<int> listindex=new List<int>();
@@ -224,6 +252,17 @@ namespace WindowsFormsApplication2
             }
 
             RefreshListView();
+        }
+
+        private void listView1_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            Vuelo temp;
+            string svuelo;
+            svuelo = listView1.FocusedItem.SubItems[2].Text;
+            temp = listaVuelos[int.Parse(listView1.FocusedItem.SubItems[6].Text)];
+            this.Hide();
+            SeleccionAsiento ventanaAsientos = new SeleccionAsiento(ref temp, ref svuelo);
+            ventanaAsientos.ShowDialog();
         }
     }
 }

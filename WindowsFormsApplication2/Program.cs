@@ -40,6 +40,7 @@ namespace WindowsFormsApplication2
 
                         String line = sr.ReadLine();
                         string[] datavuelo = line.Split('|');
+                        Console.WriteLine(datavuelo[5]);
                         DateTime date = DateTime.Parse(datavuelo[5]);
                         Vuelo vuelo = new Vuelo(int.Parse(datavuelo[0]),datavuelo[1], datavuelo[2], int.Parse(datavuelo[4]), int.Parse(datavuelo[3]),date);
                         listaVuelos.Add(vuelo);
@@ -52,8 +53,9 @@ namespace WindowsFormsApplication2
             catch (Exception e)
             {
 
-                Console.WriteLine("The file could not be read:");
+                Console.WriteLine("The file Info vueloes could not be read:");
                 Console.WriteLine(e.Message);
+                return;
             }
 
             //Leyendo usuarios

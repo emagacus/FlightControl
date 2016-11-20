@@ -21,8 +21,9 @@ namespace WindowsFormsApplication2
             InitializeComponent();
         }
 
-        public Registro(string asiento,int No_asiento, ref Vuelo vueloObject)
+        public Registro(string asiento,int No_asiento, ref Vuelo vueloObject,string nombre,string apellido)
         {
+            
             this.vueloObject = vueloObject;
             this.asiento = asiento;
             this.No_asiento = No_asiento;
@@ -31,6 +32,8 @@ namespace WindowsFormsApplication2
             this.vuelo_textBox.Enabled = false;
             this.textBox2.Text = asiento;
             this.textBox2.Enabled = false;
+            textBox3.Text = nombre;
+            textBox4.Text = apellido;
         }
 
 

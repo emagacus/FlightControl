@@ -25,8 +25,8 @@ namespace WindowsFormsApplication2
 
         Graphics g;
         ListaCiudades listaciudades = new ListaCiudades();
-        
 
+        
 
 
 
@@ -62,6 +62,7 @@ namespace WindowsFormsApplication2
             {
 
                 comboBox1.Items.Add(c.name);
+                comboBox2.Items.Add(c.name);
 
                 g.DrawEllipse(pen1, c.X, c.Y, 10, 10);
                 g.DrawString(c.getName(), new Font("Tahoma", 8),Brushes.White,c.X,c.Y);
@@ -106,6 +107,7 @@ namespace WindowsFormsApplication2
             penarrow.StartCap = LineCap.ArrowAnchor;
             penarrow.EndCap = LineCap.ArrowAnchor;
 
+        
             foreach (AristaCiudad a in arm) {
 
                 foreach (CiudadNodo c in listaciudades)
@@ -144,8 +146,8 @@ namespace WindowsFormsApplication2
             List<AristaCiudad> Krus = Kruskal();
             List<AristaCiudad> Prim = prim();
 
-            drawArm(ref Krus);
-           // drawArm(ref Prim);
+           drawArm(ref Krus);
+          // drawArm(ref Prim);
 
    
 
@@ -517,6 +519,56 @@ namespace WindowsFormsApplication2
 
         }
 
+        List<DijkstraNode> Dijkstra(CiudadNodo origen,CiudadNodo destino)
+        {
+            List<DijkstraNode> caminos = new List<DijkstraNode>();
+
+            CiudadNodo nodoActual = origen;
+            string Definitivos = "";
+            int numDef = 0;
+
+
+            //Se crea el vector de caminos
+
+            foreach (CiudadNodo c in listaciudades)
+            {
+
+                DijkstraNode nodo = new DijkstraNode(c, 1000000000);
+
+                if (c.getName() == origen.getName())
+                {
+                    nodo.peso = 0;
+                    nodo.procedencia = origen;
+                }
+
+                caminos.Add(nodo);
+            }
+
+
+            //*** Se inicia con el origen;
+
+            Definitivos = origen.getName();
+            numDef++;
+
+            //***
+
+
+            while (numDef != listaciudades.Count)
+            {
+
+                dijskUpdate(ref nodoActual, ref caminos, ref Definitivos);
+                if (Definitivos.Contains(destino.name)) { break; }
+                numDef++;
+
+            }
+
+
+
+
+            return caminos;
+        }
+
+
 
             List<DijkstraNode> Dijkstra(CiudadNodo origen)
             {
@@ -785,7 +837,7 @@ namespace WindowsFormsApplication2
            
             drawArm(ref arm);
            
-            PrintGrafoAristas();
+          //  PrintGrafoAristas();
             arm.Clear();
         }
 
@@ -875,9 +927,8 @@ namespace WindowsFormsApplication2
         }
 
 
-        private void buttonDijk_Click(object sender, EventArgs e)
+        private void dijkstraNoDestino()
         {
-
             List<DijkstraNode> caminos = Dijkstra(listaciudades[comboBox1.SelectedIndex]);
             textBox1.Text = "";
 
@@ -908,8 +959,8 @@ namespace WindowsFormsApplication2
 
             foreach (DijkstraNode d in caminos)
             {
-                string[] infoDj=new string[3];
-                
+                string[] infoDj = new string[3];
+
                 if (d.procedencia != null)
                 {
                     //  Console.WriteLine(d.IdNodo.name + d.IdNodo.X.ToString() +" "+ d.IdNodo.Y.ToString() + "----" + d.peso.ToString() + "from----- " + d.procedencia.name +" " +d.procedencia.X.ToString() +" "+ d.procedencia.Y.ToString());
@@ -932,13 +983,119 @@ namespace WindowsFormsApplication2
                     listView2.Items.Add(djitem);
 
                     g.DrawString("NO HAY RUTA!", new Font("Tahoma", 8), Brushes.Red, d.IdNodo.X, d.IdNodo.Y);
-                      }
-                }//fin foreach
-
-          
+                }
+            }//fin foreach
 
 
         }
+
+
+
+
+        private void dijkstraConDestino()
+        {
+
+            List<DijkstraNode> caminos = Dijkstra(listaciudades[comboBox1.SelectedIndex], listaciudades[comboBox2.SelectedIndex]);
+            string nameOrigen = listaciudades[comboBox1.SelectedIndex].getName();
+            string nameDestino = listaciudades[comboBox2.SelectedIndex].getName();
+            float peso = 0;
+
+            string[] infoDj = new string[3];
+
+            List<string> nodos = new List<string>();
+            string ruta = "";
+
+            textBox1.Text = "";
+
+            pictureBox1.Image = Properties.Resources.mapa;
+            pictureBox1.Image = new Bitmap(pictureBox1.Image);
+            g = Graphics.FromImage(pictureBox1.Image);
+
+
+            g.SmoothingMode = SmoothingMode.AntiAlias;                  // The smoothing mode specifies whether lines, curves, and the edges of filled areas use smoothing (also called antialiasing). One exception is that path gradient brushes do not obey the smoothing mode. Areas filled using a PathGradientBrush are rendered the same way (aliased) regardless of the SmoothingMode property.
+            g.InterpolationMode = InterpolationMode.HighQualityBicubic; // The interpolation mode determines how intermediate values between two endpoints are calculated.
+            g.PixelOffsetMode = PixelOffsetMode.HighQuality;            // Use this property to specify either higher quality, slower rendering, or lower quality, faster rendering of the contents of this Graphics object.
+            g.TextRenderingHint = TextRenderingHint.AntiAliasGridFit;
+
+            penarrow.Color = Color.FromArgb(200, Color.DarkGoldenrod);
+            penarrow.EndCap = LineCap.Flat;
+            listView2.Items.Clear();
+
+
+            string nameActual = nameDestino;
+
+            while (nameActual != nameOrigen)
+            {
+
+                foreach(DijkstraNode d in caminos)
+                {
+                   
+                    if (d.IdNodo.name == nameActual)
+                    {
+
+
+
+                        nodos.Add(d.IdNodo.name);
+
+                        g.DrawEllipse(pen1, d.IdNodo.X, d.IdNodo.Y, 10, 10);
+                        g.DrawString(d.IdNodo.name, new Font("Tahoma", 8), Brushes.White, d.IdNodo.X, d.IdNodo.Y);
+                        nameActual = d.procedencia.name;
+
+                        g.DrawLine(penarrow, d.IdNodo.X, d.IdNodo.Y, d.procedencia.X, d.procedencia.Y);
+                        g.DrawString(d.AristaPeso.ToString(), new Font("Tahoma", 12), Brushes.Black, calcMedPoint(d.IdNodo.X, d.procedencia.X), calcMedPoint(d.IdNodo.Y, d.procedencia.Y));
+
+                        
+                        g.DrawEllipse(pen1, d.procedencia.X, d.procedencia.Y, 10, 10);
+                        g.DrawString(d.procedencia.name, new Font("Tahoma", 8), Brushes.White, d.procedencia.X, d.procedencia.Y);
+
+
+                        break;
+                    }
+                }
+
+            }//fin while
+
+
+            for (int x = nodos.Count - 1; x >= 0; x--) { ruta = ruta + "->"+ nodos[x] ; }
+            foreach(DijkstraNode d in caminos) { if (d.IdNodo.name == nameDestino) { peso = d.peso;break; } }
+            ruta =nameOrigen+ ruta;
+
+            infoDj[0] = nameDestino;
+            infoDj[1] = peso.ToString();
+            infoDj[2] = ruta;
+
+
+            ListViewItem djitem = new ListViewItem(infoDj);
+            listView2.Items.Add(djitem);
+
+
+
+        }
+
+
+
+        private void buttonDijk_Click(object sender, EventArgs e)
+        {
+            if (comboBox2.SelectedItem==null)
+            {
+                dijkstraNoDestino();
+            }
+            else
+            {
+                if (comboBox1.SelectedIndex!=comboBox2.SelectedIndex)
+                {
+
+                    dijkstraConDestino();
+                    AdvSaleButton.Enabled = true;
+                }
+                else {
+                    MessageBox.Show("Origen y Destino deben ser diferentes", "ERROR",
+                    MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                }
+            }
+        }
+
+
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -948,6 +1105,80 @@ namespace WindowsFormsApplication2
         private void comboBox1_KeyPress(object sender, KeyPressEventArgs e)
         {
             e.Handled = true;
+        }
+
+        private void comboBox2_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = true;
+        }
+
+        private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void AdvSaleButton_Click(object sender, EventArgs e)
+        {
+            List<Vuelo> vuelosRuta = new List<Vuelo>();
+            bool hayAsientos = true;
+
+            if (listView2.Items.Count == 0)
+            {
+                MessageBox.Show("NO EXISTE RUTA", "ERROR",
+        MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            }
+            else
+            {
+                string ruta = listView2.Items[0].SubItems[2].Text;
+                string newruta = "";
+                Vuelo vc = new Vuelo();
+               // string vueloinf = "";
+
+                for(int x = 0; x < ruta.Length;x=x+3)
+                {
+                    newruta = newruta+ruta[x];
+                }
+
+
+
+               
+                int indx=0;
+
+                while (indx < newruta.Length-1)
+                {
+
+                    foreach (Vuelo v in listaVuelos)
+                    {
+
+                        if (v.getOrigen() == newruta[indx] && v.getDestino() == newruta[indx + 1])
+                        {
+
+                            if (v.getAsientosDisp() == 0) { hayAsientos = false; break; }
+                            vuelosRuta.Add(v);
+                            //   vc = v;
+                            //    vueloinf = v.ToString(' ');
+                            //    SeleccionAsiento venta = new SeleccionAsiento(ref vc,ref vueloinf);
+                            //   venta.ShowDialog();
+                        }
+                     
+                    }//fin foreach
+                    indx++;
+                }//fin while
+
+
+                if (hayAsientos)
+                {
+                    VentaAvanzada venta = new VentaAvanzada(ruta, ref vuelosRuta);
+                    venta.ShowDialog();
+                }
+                else
+                {
+                    MessageBox.Show("UNO O MAS VUELOS NO TIENE ASIENTOS DISPONIBLES ", "ERROR",
+                    MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+
+                }
+            }
+
         }
     }
 }

@@ -18,7 +18,8 @@ namespace WindowsFormsApplication2
         Vuelo vueloObject;
         string vuelo;
         List<Button> Botones;
-        
+        string nombre="Nombre(s)", apellido="apellidos";
+
 
         public SeleccionAsiento(ref Vuelo vueloObject,ref string vuelo)
         {
@@ -46,18 +47,48 @@ namespace WindowsFormsApplication2
 
 
 
+        public SeleccionAsiento(ref Vuelo vueloObject, ref string vuelo,string nombre,string apellido)
+        {
+            InitializeComponent();
+            Botones = new List<Button> { button1, button2, button3, button4, button5, button6, button7, button8, button9, button10, button11, button12, button13, button14, button15, button16, button17, button18, button19, button20, button21, button22, button23, button24, button25, button26, button27, button28, button29, button30 };
+            this.vuelo = vuelo;
+            this.vueloObject = vueloObject;
+
+            this.nombre = nombre;
+            this.apellido = apellido;
+
+
+
+            for (int x = 0; x < 30; x++)
+            {
+                int y = x + 1;
+                Botones[x].Text = "Asiento " + y.ToString();
+
+                if (vueloObject.getAsientos(x) == true)
+                {
+                    Botones[x].BackColor = Color.Red;
+                    Botones[x].Enabled = false;
+                }
+                else { Botones[x].BackColor = Color.Green; }
+
+            }
+
+        }
+
+
+
+
         private void SeleccionAsiento_Load(object sender, EventArgs e)
         {
 
         }
 
 
-
         private void button1_Click(object sender, EventArgs e)
         {
             button1.Enabled = false;
             this.Hide();
-            Registro registro = new Registro(button1.Text, 1, ref vueloObject);
+            Registro registro = new Registro(button1.Text, 1, ref vueloObject, nombre, apellido);
 
             registro.ShowDialog();
         }
@@ -67,7 +98,7 @@ namespace WindowsFormsApplication2
         {
             button2.Enabled = false;
             this.Hide();
-            Registro registro = new Registro(button2.Text, 2, ref vueloObject);
+            Registro registro = new Registro(button2.Text, 2, ref vueloObject, nombre, apellido);
 
             registro.ShowDialog();
         }
@@ -77,7 +108,7 @@ namespace WindowsFormsApplication2
         {
             button3.Enabled = false;
             this.Hide();
-            Registro registro = new Registro(button3.Text, 3, ref vueloObject);
+            Registro registro = new Registro(button3.Text, 3, ref vueloObject, nombre, apellido);
 
             registro.ShowDialog();
         }
@@ -87,7 +118,7 @@ namespace WindowsFormsApplication2
         {
             button4.Enabled = false;
             this.Hide();
-            Registro registro = new Registro(button4.Text, 4, ref vueloObject);
+            Registro registro = new Registro(button4.Text, 4, ref vueloObject, nombre, apellido);
 
             registro.ShowDialog();
         }
@@ -97,7 +128,7 @@ namespace WindowsFormsApplication2
         {
             button5.Enabled = false;
             this.Hide();
-            Registro registro = new Registro(button5.Text, 5, ref vueloObject);
+            Registro registro = new Registro(button5.Text, 5, ref vueloObject, nombre, apellido);
 
             registro.ShowDialog();
         }
@@ -107,7 +138,7 @@ namespace WindowsFormsApplication2
         {
             button6.Enabled = false;
             this.Hide();
-            Registro registro = new Registro(button6.Text, 6, ref vueloObject);
+            Registro registro = new Registro(button6.Text, 6, ref vueloObject, nombre, apellido);
 
             registro.ShowDialog();
         }
@@ -117,7 +148,7 @@ namespace WindowsFormsApplication2
         {
             button7.Enabled = false;
             this.Hide();
-            Registro registro = new Registro(button7.Text, 7, ref vueloObject);
+            Registro registro = new Registro(button7.Text, 7, ref vueloObject, nombre, apellido);
 
             registro.ShowDialog();
         }
@@ -127,7 +158,7 @@ namespace WindowsFormsApplication2
         {
             button8.Enabled = false;
             this.Hide();
-            Registro registro = new Registro(button8.Text, 8, ref vueloObject);
+            Registro registro = new Registro(button8.Text, 8, ref vueloObject, nombre, apellido);
 
             registro.ShowDialog();
         }
@@ -137,7 +168,7 @@ namespace WindowsFormsApplication2
         {
             button9.Enabled = false;
             this.Hide();
-            Registro registro = new Registro(button9.Text, 9, ref vueloObject);
+            Registro registro = new Registro(button9.Text, 9, ref vueloObject, nombre, apellido);
 
             registro.ShowDialog();
         }
@@ -147,7 +178,7 @@ namespace WindowsFormsApplication2
         {
             button10.Enabled = false;
             this.Hide();
-            Registro registro = new Registro(button10.Text, 10, ref vueloObject);
+            Registro registro = new Registro(button10.Text, 10, ref vueloObject, nombre, apellido);
 
             registro.ShowDialog();
         }
@@ -157,7 +188,7 @@ namespace WindowsFormsApplication2
         {
             button11.Enabled = false;
             this.Hide();
-            Registro registro = new Registro(button11.Text, 11, ref vueloObject);
+            Registro registro = new Registro(button11.Text, 11, ref vueloObject, nombre, apellido);
 
             registro.ShowDialog();
         }
@@ -167,7 +198,7 @@ namespace WindowsFormsApplication2
         {
             button12.Enabled = false;
             this.Hide();
-            Registro registro = new Registro(button12.Text, 12, ref vueloObject);
+            Registro registro = new Registro(button12.Text, 12, ref vueloObject, nombre, apellido);
 
             registro.ShowDialog();
         }
@@ -177,7 +208,7 @@ namespace WindowsFormsApplication2
         {
             button13.Enabled = false;
             this.Hide();
-            Registro registro = new Registro(button13.Text, 13, ref vueloObject);
+            Registro registro = new Registro(button13.Text, 13, ref vueloObject, nombre, apellido);
 
             registro.ShowDialog();
         }
@@ -187,7 +218,7 @@ namespace WindowsFormsApplication2
         {
             button14.Enabled = false;
             this.Hide();
-            Registro registro = new Registro(button14.Text, 14, ref vueloObject);
+            Registro registro = new Registro(button14.Text, 14, ref vueloObject, nombre, apellido);
 
             registro.ShowDialog();
         }
@@ -197,7 +228,7 @@ namespace WindowsFormsApplication2
         {
             button15.Enabled = false;
             this.Hide();
-            Registro registro = new Registro(button15.Text, 15, ref vueloObject);
+            Registro registro = new Registro(button15.Text, 15, ref vueloObject, nombre, apellido);
 
             registro.ShowDialog();
         }
@@ -207,7 +238,7 @@ namespace WindowsFormsApplication2
         {
             button16.Enabled = false;
             this.Hide();
-            Registro registro = new Registro(button16.Text, 16, ref vueloObject);
+            Registro registro = new Registro(button16.Text, 16, ref vueloObject, nombre, apellido);
 
             registro.ShowDialog();
         }
@@ -217,7 +248,7 @@ namespace WindowsFormsApplication2
         {
             button17.Enabled = false;
             this.Hide();
-            Registro registro = new Registro(button17.Text, 17, ref vueloObject);
+            Registro registro = new Registro(button17.Text, 17, ref vueloObject, nombre, apellido);
 
             registro.ShowDialog();
         }
@@ -227,7 +258,7 @@ namespace WindowsFormsApplication2
         {
             button18.Enabled = false;
             this.Hide();
-            Registro registro = new Registro(button18.Text, 18, ref vueloObject);
+            Registro registro = new Registro(button18.Text, 18, ref vueloObject, nombre, apellido);
 
             registro.ShowDialog();
         }
@@ -237,7 +268,7 @@ namespace WindowsFormsApplication2
         {
             button19.Enabled = false;
             this.Hide();
-            Registro registro = new Registro(button19.Text, 19, ref vueloObject);
+            Registro registro = new Registro(button19.Text, 19, ref vueloObject, nombre, apellido);
 
             registro.ShowDialog();
         }
@@ -247,7 +278,7 @@ namespace WindowsFormsApplication2
         {
             button20.Enabled = false;
             this.Hide();
-            Registro registro = new Registro(button20.Text, 20, ref vueloObject);
+            Registro registro = new Registro(button20.Text, 20, ref vueloObject, nombre, apellido);
 
             registro.ShowDialog();
         }
@@ -257,7 +288,7 @@ namespace WindowsFormsApplication2
         {
             button21.Enabled = false;
             this.Hide();
-            Registro registro = new Registro(button21.Text, 21, ref vueloObject);
+            Registro registro = new Registro(button21.Text, 21, ref vueloObject, nombre, apellido);
 
             registro.ShowDialog();
         }
@@ -267,7 +298,7 @@ namespace WindowsFormsApplication2
         {
             button22.Enabled = false;
             this.Hide();
-            Registro registro = new Registro(button22.Text, 22, ref vueloObject);
+            Registro registro = new Registro(button22.Text, 22, ref vueloObject, nombre, apellido);
 
             registro.ShowDialog();
         }
@@ -277,7 +308,7 @@ namespace WindowsFormsApplication2
         {
             button23.Enabled = false;
             this.Hide();
-            Registro registro = new Registro(button23.Text, 23, ref vueloObject);
+            Registro registro = new Registro(button23.Text, 23, ref vueloObject, nombre, apellido);
 
             registro.ShowDialog();
         }
@@ -287,7 +318,7 @@ namespace WindowsFormsApplication2
         {
             button24.Enabled = false;
             this.Hide();
-            Registro registro = new Registro(button24.Text, 24, ref vueloObject);
+            Registro registro = new Registro(button24.Text, 24, ref vueloObject, nombre, apellido);
 
             registro.ShowDialog();
         }
@@ -297,7 +328,7 @@ namespace WindowsFormsApplication2
         {
             button25.Enabled = false;
             this.Hide();
-            Registro registro = new Registro(button25.Text, 25, ref vueloObject);
+            Registro registro = new Registro(button25.Text, 25, ref vueloObject, nombre, apellido);
 
             registro.ShowDialog();
         }
@@ -307,7 +338,7 @@ namespace WindowsFormsApplication2
         {
             button26.Enabled = false;
             this.Hide();
-            Registro registro = new Registro(button26.Text, 26, ref vueloObject);
+            Registro registro = new Registro(button26.Text, 26, ref vueloObject, nombre, apellido);
 
             registro.ShowDialog();
         }
@@ -317,7 +348,7 @@ namespace WindowsFormsApplication2
         {
             button27.Enabled = false;
             this.Hide();
-            Registro registro = new Registro(button27.Text, 27, ref vueloObject);
+            Registro registro = new Registro(button27.Text, 27, ref vueloObject, nombre, apellido);
 
             registro.ShowDialog();
         }
@@ -327,7 +358,7 @@ namespace WindowsFormsApplication2
         {
             button28.Enabled = false;
             this.Hide();
-            Registro registro = new Registro(button28.Text, 28, ref vueloObject);
+            Registro registro = new Registro(button28.Text, 28, ref vueloObject, nombre, apellido);
 
             registro.ShowDialog();
         }
@@ -337,7 +368,7 @@ namespace WindowsFormsApplication2
         {
             button29.Enabled = false;
             this.Hide();
-            Registro registro = new Registro(button29.Text, 29, ref vueloObject);
+            Registro registro = new Registro(button29.Text, 29, ref vueloObject, nombre, apellido);
 
             registro.ShowDialog();
         }
@@ -347,11 +378,10 @@ namespace WindowsFormsApplication2
         {
             button30.Enabled = false;
             this.Hide();
-            Registro registro = new Registro(button30.Text, 30, ref vueloObject);
+            Registro registro = new Registro(button30.Text, 30, ref vueloObject, nombre, apellido);
 
             registro.ShowDialog();
         }
-
 
 
 

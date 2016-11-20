@@ -44,6 +44,8 @@
             this.columnDestino = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnPeso = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnRuta = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.comboBox2 = new System.Windows.Forms.ComboBox();
+            this.AdvSaleButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -193,11 +195,35 @@
             this.columnRuta.Text = "Ruta";
             this.columnRuta.Width = 172;
             // 
+            // comboBox2
+            // 
+            this.comboBox2.FormattingEnabled = true;
+            this.comboBox2.Location = new System.Drawing.Point(928, 220);
+            this.comboBox2.Name = "comboBox2";
+            this.comboBox2.Size = new System.Drawing.Size(121, 21);
+            this.comboBox2.TabIndex = 12;
+            this.comboBox2.Text = "Seleccione Destino";
+            this.comboBox2.SelectedIndexChanged += new System.EventHandler(this.comboBox2_SelectedIndexChanged);
+            this.comboBox2.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.comboBox2_KeyPress);
+            // 
+            // AdvSaleButton
+            // 
+            this.AdvSaleButton.Enabled = false;
+            this.AdvSaleButton.Location = new System.Drawing.Point(760, 578);
+            this.AdvSaleButton.Name = "AdvSaleButton";
+            this.AdvSaleButton.Size = new System.Drawing.Size(289, 74);
+            this.AdvSaleButton.TabIndex = 13;
+            this.AdvSaleButton.Text = "Comprar Boletos ";
+            this.AdvSaleButton.UseVisualStyleBackColor = true;
+            this.AdvSaleButton.Click += new System.EventHandler(this.AdvSaleButton_Click);
+            // 
             // GrafoVisual
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1061, 664);
+            this.Controls.Add(this.AdvSaleButton);
+            this.Controls.Add(this.comboBox2);
             this.Controls.Add(this.listView2);
             this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.buttonDijk);
@@ -237,5 +263,7 @@
         private System.Windows.Forms.ColumnHeader columnDestino;
         private System.Windows.Forms.ColumnHeader columnPeso;
         private System.Windows.Forms.ColumnHeader columnRuta;
+        private System.Windows.Forms.ComboBox comboBox2;
+        private System.Windows.Forms.Button AdvSaleButton;
     }
 }
